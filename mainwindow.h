@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "logindialog.h"
+#include "registerdialog.h"
 
 /******************************************************************************
  *
@@ -27,7 +29,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void slot_switch_register();
+
 private:
     Ui::MainWindow *ui;
+
+    LoginDialog* m_loginDialog;
+    RegisterDialog* m_registerDialog;
+
 };
 #endif // MAINWINDOW_H
