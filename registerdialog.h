@@ -16,6 +16,12 @@ public:
     ~RegisterDialog();
 
 private:
+    void showTip(QString str, bool ok);
+
+private slots:
+    void on_pushButton_get_clicked();
+
+private:
     Ui::RegisterDialog *ui;
 };
 
