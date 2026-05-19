@@ -1,7 +1,7 @@
 #include "registerdialog.h"
 #include "ui_registerdialog.h"
 #include "httpmgr.h"
-
+#include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QRegularExpression>
@@ -61,7 +61,12 @@ void RegisterDialog::on_pushButton_get_clicked()
     bool match = regexp.match(email).hasMatch();
     if(match) {
         //发送http验证码
+        QJsonObject json_obj;
+        json_obj["email"] = email;
+        HttpMgr::getInstance()->postHttpReq(QUrl(gate_url_prefix + "/get_verifycode"), json_obj,
+                                            ReqId::ID_GET_VERIFY_CODE, Modules::REGISTERMOD);
 
+        qDebug() << gate_url_prefix;
         return;
     } else {
         showTip(tr("邮箱地址不正确"), false);

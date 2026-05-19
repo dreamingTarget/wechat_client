@@ -6,6 +6,7 @@
 #include <QStyle>
 
 extern std::function<void(QWidget*)> repolish;
+extern QString gate_url_prefix;
 
 enum ReqId {
     ID_GET_VERIFY_CODE = 1001,

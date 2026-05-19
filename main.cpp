@@ -2,7 +2,9 @@
 
 #include <QApplication>
 #include <QCoreApplication>
+#include <QDir>
 #include <QFile>
+#include <QSettings>
 
 int main(int argc, char *argv[])
 {
@@ -23,7 +25,15 @@ int main(int argc, char *argv[])
         qDebug("file open failed");
     }
 
+    QString fileName = "config.ini";
+    QString appPath = QCoreApplication::applicationDirPath();
+    QString configPath = QDir::toNativeSeparators(appPath + QDir::separator() + fileName);
+    QSettings settings(configPath, QSettings::IniFormat);
+    QString gate_host = settings.value("GateServer/host").toString();
+    QString gate_port = settings.value("GateServer/port").toString();
+    gate_url_prefix = "http://" + gate_host + ":" + gate_port;
+
     MainWindow w;
     w.show();
-    return a.exec();    
+    return a.exec();
 }

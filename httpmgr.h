@@ -14,10 +14,10 @@ public std::enable_shared_from_this<HttpMgr>
 
 public:
     ~HttpMgr();
+    void postHttpReq(QUrl url, QJsonObject json, ReqId req_id, Modules mod);
 
 private:
     HttpMgr();
-    void postHttpReq(QUrl url, QJsonObject json, ReqId req_id, Modules mod);
 
 signals:
     void signal_http_finish(ReqId id, QString res, ErrorCodes err, Modules mod);
