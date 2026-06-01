@@ -25,6 +25,8 @@ private slots:
     void on_pushButton_get_clicked();
     void slot_reg_mod_finish(ReqId id, QString res, ErrorCodes err);
 
+    void on_pushButton_OK_clicked();
+
 private:
     Ui::RegisterDialog *ui;
     QMap<ReqId, std::function<void(const QJsonObject&)>> m_handlers;
