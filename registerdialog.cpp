@@ -61,6 +61,7 @@ void RegisterDialog::initHttpHandlers()
             // emit sig_switch_login();
             auto email = jsonObj["email"].toString();
             qDebug() << "email is " << email;
+            qDebug() << "user uid is " << jsonObj["uid"].toString();
 
         } else {
             showTip(tr("注册失败"), false);
