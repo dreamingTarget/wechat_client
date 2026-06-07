@@ -31,6 +31,7 @@ public:
 
 private slots:
     void slot_switch_register();
+    void slot_switch_login();
 
 private:
     Ui::MainWindow *ui;
