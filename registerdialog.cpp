@@ -260,6 +260,7 @@ void RegisterDialog::on_pushButton_get_clicked()
         return;
     } else {
         showTip(tr("邮箱地址不正确"), false);
+        ui->pushButton_get->reset();
     }
 }
 
@@ -335,6 +336,7 @@ void RegisterDialog::on_pushButton_ret_clicked()
 
 void RegisterDialog::on_pushButton_cancel_clicked()
 {
+    m_timer->stop();
     emit signal_switch_login();
 }
 

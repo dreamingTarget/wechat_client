@@ -45,3 +45,14 @@ QDialog#LoginDialog, #RegisterDialog {
 #label_confirm_visible[state='visible_hover']{
    border-image: url(:/picture/visible_hover.png);
 }
+
+#label_forget_pwd[state = 'normal'], #label_forget_pwd[state = 'selected'] {
+   color: black;
+}
+
+#label_forget_pwd[state = 'hover'], #label_forget_pwd[state = 'selected_hover'] {
+   color: rgb(42, 112, 241);
+}
+
+
+

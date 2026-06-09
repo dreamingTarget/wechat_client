@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(m_loginDialog, &LoginDialog::signal_switch_register, this, &MainWindow::slot_switch_register);
 
+    connect(m_loginDialog, &LoginDialog::signal_switch_reset, this, &MainWindow::slot_switch_reset);
 }
 
 MainWindow::~MainWindow()
@@ -49,5 +50,28 @@ void MainWindow::slot_switch_login()
     setCentralWidget(m_loginDialog);
     m_loginDialog->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
     connect(m_loginDialog, &LoginDialog::signal_switch_register, this, &MainWindow::slot_switch_register);
+    connect(m_loginDialog, &LoginDialog::signal_switch_reset, this, &MainWindow::slot_switch_reset);
+
+}
+
+void MainWindow::slot_switch_reset()
+{
+    //创建一个CentralWidget, 并将其设置为MainWindow的中心部件
+    m_resetDialog = new ResetDialog(this);
+    m_resetDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
+    setCentralWidget(m_resetDialog);
+    // m_loginDialog->hide();
+    // m_resetDialog->show();
+    //注册返回登录信号和槽函数
+    connect(m_resetDialog, &ResetDialog::signal_switch_login, this, &MainWindow::slot_reset_switch_login);
+}
+
+void MainWindow::slot_reset_switch_login()
+{
+    m_loginDialog = new LoginDialog(this);
+    setCentralWidget(m_loginDialog);
+    m_loginDialog->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
+    connect(m_loginDialog, &LoginDialog::signal_switch_register, this, &MainWindow::slot_switch_register);
+    connect(m_loginDialog, &LoginDialog::signal_switch_reset, this, &MainWindow::slot_switch_reset);
 
 }

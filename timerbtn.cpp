@@ -8,10 +8,7 @@ TimerBtn::TimerBtn(QWidget*parent) : QPushButton(parent), m_counter(60) {
     connect(m_timer, &QTimer::timeout, this, [this](){
         m_counter--;
         if(m_counter <= 0){
-            m_timer->stop();
-            m_counter = 60;
-            this->setText("获取");
-            this->setEnabled(true);
+            reset();
             return;
         }
         setText(QString::number(m_counter));
@@ -20,8 +17,15 @@ TimerBtn::TimerBtn(QWidget*parent) : QPushButton(parent), m_counter(60) {
 
 TimerBtn::~TimerBtn()
 {
+    reset();
+}
+
+void TimerBtn::reset()
+{
     m_timer->stop();
-    delete m_timer;
+    setText("获取");
+    m_counter = 60;
+    setEnabled(true);
 }
 
 void TimerBtn::mouseReleaseEvent(QMouseEvent *event)
