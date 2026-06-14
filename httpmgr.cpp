@@ -45,5 +45,7 @@ void HttpMgr::slot_http_finish(ReqId id, QString res, ErrorCodes err, Modules mo
     } else if (mod == Modules::RESETMOD) {
         emit signal_reset_mod_finish(id, res, err);
         qDebug("signal_reset_mod_finish");
+    } else if (mod == Modules::LOGINMOD) {
+        emit signal_login_mod_finish(id, res, err);
     }
 }

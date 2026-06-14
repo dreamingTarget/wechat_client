@@ -1,6 +1,12 @@
 #include "logindialog.h"
+#include <QRegularExpression>
+#include "global.h"
+#include "httpmgr.h"
+#include <QJsonObject>
 #include "ui_logindialog.h"
 #include <QDebug>
+#include <QJsonDocument>
+#include <QJsonValue>
 #include <QPainter>
 #include <QPainterPath>
 
@@ -18,6 +24,22 @@ LoginDialog::LoginDialog(QWidget *parent)
     connect(ui->label_forget_pwd, &ClickedLabel::clicked, this, &LoginDialog::slot_forget_pwd);
 
     initHeadImage();
+    initHttpHandlers();
+    connect(HttpMgr::getInstance().get(), &HttpMgr::signal_login_mod_finish, this,
+            &LoginDialog::slot_login_mod_finish);
+
+    ui->lineEdit_pwd->setEchoMode(QLineEdit::Password);
+    ui->label_pwd_visible->setCursor(Qt::PointingHandCursor);
+    ui->label_pwd_visible->setState("unvisible","unvisible_hover","","visible",
+                                    "visible_hover","");
+    connect(ui->label_pwd_visible, &ClickedLabel::clicked, this, [this]() {
+        auto state = ui->label_pwd_visible->getCurState();
+        if(state == ClickLbState::Normal){
+            ui->lineEdit_pwd->setEchoMode(QLineEdit::Password);
+        }else{
+            ui->lineEdit_pwd->setEchoMode(QLineEdit::Normal);
+        }
+    });
 }
 
 LoginDialog::~LoginDialog()
@@ -110,6 +132,153 @@ void LoginDialog::initHeadImage()
     // 补充：确保Label不额外拉伸图片，填满自身
     ui->label_image->setScaledContents(true);
     ui->label_image->setFixedSize(LABEL_WIDTH, LABEL_HEIGHT); // 锁定Label为200*200正方形
+
+}
+
+bool LoginDialog::checkEmailValid()
+{
+    //验证邮箱的地址正则表达式
+    auto email = ui->lineEdit_email->text();
+    //邮箱地址的正则表达式
+    QRegularExpression regex(R"((\w+)(\.|_)?(\w*)@(\w+)(\.(\w+))+)");
+    // 执行正则表达式匹配
+    bool match = regex.match(email).hasMatch();
+    if (!match) {
+        //提示邮箱不正确
+        addTipErr(TipErr::TIP_EMAIL_ERR, "邮箱地址不正确");
+        return false;
+    }
+    delTipErr(TipErr::TIP_EMAIL_ERR);
+    return true;
+
+}
+
+bool LoginDialog::checkPwdValid()
+{
+    auto pass = ui->lineEdit_pwd->text();
+    if (pass.length() < 6 || pass.length() > 15) {
+        //提示长度不准确
+        addTipErr(TipErr::TIP_PWD_ERR, tr("密码长度应为6~15"));
+        return false;
+    }
+    // 创建一个正则表达式对象，按照上述密码要求
+    // 这个正则表达式解释：
+    // ^[a-zA-Z0-9!@#$%^&*]{6,15}$ 密码长度至少6，可以是字母、数字和特定的特殊字符
+    QRegularExpression regex(R"(^[a-zA-Z0-9!@#$%^&*]{6,15}$)");
+    bool match = regex.match(pass).hasMatch();
+    if (!match) {
+        //提示字符非法
+        addTipErr(TipErr::TIP_PWD_ERR, tr("不能包含非法字符"));
+        return false;
+    }
+
+    delTipErr(TipErr::TIP_PWD_ERR);
+    return true;
+}
+
+void LoginDialog::addTipErr(TipErr te, QString tips)
+{
+    m_tip_errs[te] = tips;
+    showTip(tips, false);
+}
+
+void LoginDialog::delTipErr(TipErr te)
+{
+    m_tip_errs.remove(te);
+    if (m_tip_errs.empty()) {
+        ui->label_err_tip->clear();
+        return;
+    }
+    showTip(m_tip_errs.first(), false);
+}
+
+void LoginDialog::showTip(QString str, bool ok)
+{
+    ui->label_err_tip->setText(str);
+    if (ok) ui->label_err_tip->setProperty("state", "normal");
+    else ui->label_err_tip->setProperty("state", "err");
+    repolish(ui->label_err_tip);
+}
+
+bool LoginDialog::enableBtn(bool enabled)
+{
+    ui->pushButton_login->setEnabled(enabled);
+    ui->pushButton_register->setEnabled(enabled);
+    ui->label_forget_pwd->setEnabled(enabled);
+    return true;
+}
+
+void LoginDialog::initHttpHandlers()
+{
+    //注册获取登录回包逻辑
+    m_handlesMap.insert(ReqId::ID_LOGIN_USER, [this](QJsonObject jsonObj){
+        int error = jsonObj["error"].toInt();
+        if(error != ErrorCodes::SUCCESS){
+            showTip(tr("参数错误"),false);
+            enableBtn(true);
+            return;
+        }
+        auto email = jsonObj["email"].toString();
+
+        //发送信息通知tcpmgr发送长连接
+        ServerInfo info;
+        info.uid = jsonObj["uid"].toInt();
+        info.host = jsonObj["host"].toString();
+        info.port = jsonObj["port"].toString();
+        info.token = jsonObj["token"].toString();
+
+        m_uid = info.uid;
+        m_token = info.token;
+        qDebug()<< "email is " << email << " uid is " << info.uid <<" host is "
+                 << info.host << " Port is " << info.port << " Token is " << info.token;
+        emit signal_connect_tcp(info);
+    });
+}
+
+void LoginDialog::on_pushButton_login_clicked()
+{
+    qDebug() << "login btn clicked";
+    if (checkEmailValid() == false) return;
+    if (checkPwdValid() == false) return;
+
+    enableBtn(false);
+    auto email = ui->lineEdit_email->text();
+    auto pwd = ui->lineEdit_pwd->text();
+
+    //发送http请求登录
+    QJsonObject obj;
+    obj["email"] = email;
+    QByteArray passwdHashBa = QCryptographicHash::hash(pwd.toUtf8(), QCryptographicHash::Sha256).toHex();
+    obj["passwd"] = QJsonValue(QString::fromUtf8(passwdHashBa));
+    HttpMgr::getInstance()->postHttpReq(QUrl(gate_url_prefix + "/user_login"),
+                                            obj, ReqId::ID_LOGIN_USER, Modules::LOGINMOD);
+}
+
+void LoginDialog::slot_login_mod_finish(ReqId id, QString res, ErrorCodes err)
+{
+    if(err != ErrorCodes::SUCCESS){
+        showTip(tr("网络请求错误"),false);
+        return;
+    }
+
+    // 解析 JSON 字符串,res需转化为QByteArray
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(res.toUtf8());
+    //json解析错误
+    if(jsonDoc.isNull()){
+        showTip(tr("json解析错误"),false);
+        return;
+    }
+
+    //json解析错误
+    if(!jsonDoc.isObject()){
+        showTip(tr("json解析错误"),false);
+        return;
+    }
+
+    //调用对应的逻辑,根据id回调。
+    m_handlesMap[id](jsonDoc.object());
+
+    return;
 
 }
 

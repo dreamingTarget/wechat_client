@@ -23,6 +23,7 @@ signals:
     void signal_http_finish(ReqId id, QString res, ErrorCodes err, Modules mod);
     void signal_reg_mod_finish(ReqId id, QString res, ErrorCodes err);
     void signal_reset_mod_finish(ReqId id, QString res, ErrorCodes err);
+    void signal_login_mod_finish(ReqId id, QString res, ErrorCodes err);
 
 private slots:
     void slot_http_finish(ReqId id, QString res, ErrorCodes err, Modules mod);

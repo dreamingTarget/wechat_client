@@ -21,6 +21,7 @@ enum ReqId {
 enum Modules {
     REGISTERMOD = 0,
     RESETMOD = 1,
+    LOGINMOD = 2
 };
 
 enum ErrorCodes {
@@ -43,6 +44,13 @@ enum TipErr {
 enum ClickLbState{
     Normal = 0,
     Selected = 1
+};
+
+struct ServerInfo {
+    QString host;
+    QString port;
+    QString token;
+    int uid;
 };
 
 #endif // GLOBAL_H
