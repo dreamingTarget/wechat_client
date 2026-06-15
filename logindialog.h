@@ -38,6 +38,9 @@ private slots:
     void on_pushButton_login_clicked();
     void slot_login_mod_finish(ReqId id, QString res, ErrorCodes err);
 
+    void slot_tcp_conn_finished(bool success);
+    void slot_tcp_conn_failed(int err);
+
 private:
     Ui::LoginDialog *ui;
     QMap<TipErr, QString> m_tip_errs;

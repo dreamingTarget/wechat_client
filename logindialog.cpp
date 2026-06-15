@@ -3,6 +3,7 @@
 #include "global.h"
 #include "httpmgr.h"
 #include <QJsonObject>
+#include "tcpmgr.h"
 #include "ui_logindialog.h"
 #include <QDebug>
 #include <QJsonDocument>
@@ -40,6 +41,14 @@ LoginDialog::LoginDialog(QWidget *parent)
             ui->lineEdit_pwd->setEchoMode(QLineEdit::Normal);
         }
     });
+
+    //连接tcp连接请求的信号和槽函数
+    connect(this, &LoginDialog::signal_connect_tcp, TcpMgr::getInstance().get(), &TcpMgr::slot_tcp_connect);
+    //连接tcp管理者发出的连接成功信号
+    connect(TcpMgr::getInstance().get(), &TcpMgr::sig_conn_success, this, &LoginDialog::slot_tcp_conn_finished);
+    //连接tcp管理者发出的连接失败信号
+    connect(TcpMgr::getInstance().get(), &TcpMgr::sig_login_failed, this, &LoginDialog::slot_tcp_conn_failed);
+
 }
 
 LoginDialog::~LoginDialog()
@@ -280,5 +289,30 @@ void LoginDialog::slot_login_mod_finish(ReqId id, QString res, ErrorCodes err)
 
     return;
 
+}
+
+void LoginDialog::slot_tcp_conn_finished(bool success)
+{
+    if (success) {
+        showTip(tr("聊天服务器连接成功，正在登录......"), true);
+        QJsonObject obj;
+        obj["uid"] = m_uid;
+        obj["token"] = m_token;
+
+        QJsonDocument doc(obj);
+        QString jsonstr = doc.toJson(QJsonDocument::Indented);
+        //发送tcp请求给chatserver
+        emit TcpMgr::getInstance()->sig_send_data(ReqId::ID_CHAT_LOGIN, jsonstr);
+    } else {
+        showTip(tr("网络异常"), false);
+        enableBtn(true);
+    }
+}
+
+void LoginDialog::slot_tcp_conn_failed(int err)
+{
+    QString result = QString(tr("登陆失败，err is %1")).arg(err);
+    showTip(result, false);
+    enableBtn(true);
 }
 
