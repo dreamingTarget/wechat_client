@@ -18,7 +18,8 @@ SOURCES += \
     registerdialog.cpp \
     resetdialog.cpp \
     tcpmgr.cpp \
-    timerbtn.cpp
+    timerbtn.cpp \
+    usermanager.cpp
 
 HEADERS += \
     clickedlabel.h \
@@ -30,7 +31,8 @@ HEADERS += \
     resetdialog.h \
     singleton.h \
     tcpmgr.h \
-    timerbtn.h
+    timerbtn.h \
+    usermanager.h
 
 FORMS += \
     logindialog.ui \

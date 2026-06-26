@@ -1,4 +1,5 @@
 #include "tcpmgr.h"
+#include "usermanager.h"
 #include <QAbstractSocket>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -128,10 +129,11 @@ void TcpMgr::initHandlers()
         }
 
         //UserManager -->
-        // UserManager::getInstance()->setName(obj["name"].toString());
-        // UserManager::getInstance()->setUid(obj["uid"].toInt());
-        // UserManager::getInstance()->setToken(obj["token"].toString());
+        UserManager::getInstance()->setName(obj["name"].toString());
+        UserManager::getInstance()->setUid(obj["uid"].toInt());
+        UserManager::getInstance()->setToken(obj["token"].toString());
         emit sig_switch_chatdlg();
+        qDebug() << "sig_switch_chatdlg()";
     });
 }
 
