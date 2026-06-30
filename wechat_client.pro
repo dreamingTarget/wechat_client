@@ -9,12 +9,19 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    chatdialog.cpp \
+    chatuserlist.cpp \
+    chatuserwidget.cpp \
+    clickedbtn.cpp \
     clickedlabel.cpp \
+    customizeedit.cpp \
     global.cpp \
     httpmgr.cpp \
+    listitembase.cpp \
     logindialog.cpp \
     main.cpp \
     mainwindow.cpp \
+    pagechat.cpp \
     registerdialog.cpp \
     resetdialog.cpp \
     tcpmgr.cpp \
@@ -22,11 +29,18 @@ SOURCES += \
     usermanager.cpp
 
 HEADERS += \
+    chatdialog.h \
+    chatuserlist.h \
+    chatuserwidget.h \
+    clickedbtn.h \
     clickedlabel.h \
+    customizeedit.h \
     global.h \
     httpmgr.h \
+    listitembase.h \
     logindialog.h \
     mainwindow.h \
+    pagechat.h \
     registerdialog.h \
     resetdialog.h \
     singleton.h \
@@ -35,8 +49,11 @@ HEADERS += \
     usermanager.h
 
 FORMS += \
+    chatdialog.ui \
+    chatuserwidget.ui \
     logindialog.ui \
     mainwindow.ui \
+    pagechat.ui \
     registerdialog.ui \
     resetdialog.ui
 

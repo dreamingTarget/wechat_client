@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "chatdialog.h"
 #include "logindialog.h"
 #include "registerdialog.h"
 #include "resetdialog.h"
@@ -35,6 +36,7 @@ private slots:
     void slot_switch_login();
     void slot_switch_reset();
     void slot_reset_switch_login();
+    void slot_switch_chat();
 
 private:
     Ui::MainWindow *ui;
@@ -42,6 +44,7 @@ private:
     LoginDialog* m_loginDialog;
     RegisterDialog* m_registerDialog;
     ResetDialog* m_resetDialog;
+    ChatDialog* m_chatDialog;
 
 };
 #endif // MAINWINDOW_H

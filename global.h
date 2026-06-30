@@ -8,6 +8,9 @@
 extern std::function<void(QWidget*)> repolish;
 extern std::function<QString(QString)> xorString;
 extern QString gate_url_prefix;
+extern std::vector<QString>  strs;
+extern std::vector<QString> heads;
+extern std::vector<QString> names;
 
 enum ReqId {
     ID_GET_VERIFY_CODE = 1001,
@@ -44,6 +47,21 @@ enum TipErr {
 enum ClickLbState{
     Normal = 0,
     Selected = 1
+};
+
+enum ChatUIMode {
+    SEARCH_MODE,
+    CHAT_MODE,
+    CONTACT_MODE,
+};
+
+enum ListItemType {
+    CHAT_USER_ITEM,
+    CONTACT_USER_ITEM,
+    SEARCH_USER_ITEM,
+    ADD_USER_TIP_ITEM,
+    INVALID_ITEM,
+    GROUP_TIP_ITEM,
 };
 
 struct ServerInfo {
