@@ -128,7 +128,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_emo">
+          <widget class="ClickedBtn" name="pushButton_emo">
            <property name="minimumSize">
             <size>
              <width>25</width>
@@ -163,7 +163,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_file">
+          <widget class="ClickedBtn" name="pushButton_file">
            <property name="minimumSize">
             <size>
              <width>25</width>
@@ -242,7 +242,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_receive">
+          <widget class="ClickedBtn" name="pushButton_receive">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -277,7 +277,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_send">
+          <widget class="ClickedBtn" name="pushButton_send">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -319,6 +319,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ClickedBtn</class>
+   <extends>QPushButton</extends>
+   <header>clickedbtn.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

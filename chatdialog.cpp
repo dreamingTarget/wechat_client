@@ -1,6 +1,8 @@
 #include "chatdialog.h"
 #include "chatuserwidget.h"
+#include "loadingdia.h"
 #include "qaction.h"
+#include "qtimer.h"
 #include "ui_chatdialog.h"
 
 #include <QRandomGenerator>
@@ -31,6 +33,7 @@ ChatDialog::ChatDialog(QWidget *parent)
         showSearch(false);
     });
     showSearch(false);
+    connect(ui->listWidget_chat_user, &ChatUserList::sig_loading_chat_user, this, &ChatDialog::slot_loading_chat_user);
     addChatUserList();
 }
 
@@ -75,5 +78,23 @@ void ChatDialog::addChatUserList()
         ui->listWidget_chat_user->addItem(item);
         ui->listWidget_chat_user->setItemWidget(item, chat_user_wid);
     }
+}
+
+void ChatDialog::slot_loading_chat_user()
+{
+    if (m_loading) return;
+    m_loading = true;
+    LoadingDia* loadDia = new LoadingDia;
+    std::shared_ptr<QListWidgetItem> item = std::make_shared<QListWidgetItem>();
+    item->setSizeHint(loadDia->size());
+    ui->listWidget_chat_user->addItem(item.get());
+    ui->listWidget_chat_user->setItemWidget(item.get(), loadDia);
+
+    QTimer::singleShot(500, this, [=](){
+        ui->listWidget_chat_user->takeItem(ui->listWidget_chat_user->row(item.get()));
+        addChatUserList();
+        ui->listWidget_chat_user->scrollToBottom();
+        m_loading = false;
+    });
 }
 

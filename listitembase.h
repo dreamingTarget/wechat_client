@@ -19,6 +19,10 @@ signals:
 private:
     ListItemType m_type;
 
+
+    // QWidget interface
+protected:
+    virtual void paintEvent(QPaintEvent *event) override;
 };
 
 #endif // LISTITEMBASE_H

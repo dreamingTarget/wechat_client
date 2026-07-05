@@ -15,8 +15,8 @@ public:
     explicit PageChat(QWidget *parent = nullptr);
     ~PageChat();
 
-// protected:
-//     void paintEvent(QPaintEvent* event) override;
+protected:
+    void paintEvent(QPaintEvent* event) override;
 
 // private slots:
 //     void on_pushButton_send_clicked();

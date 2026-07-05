@@ -20,6 +20,9 @@ private:
     void showSearch(bool search = false);
     void addChatUserList();
 
+private slots:
+    void slot_loading_chat_user();
+
 private:
     Ui::ChatDialog *ui;
 

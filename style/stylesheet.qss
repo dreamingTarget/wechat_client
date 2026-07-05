@@ -152,4 +152,88 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     background: none; /* 页面滚动部分背景透明 */
 }
 
+LoadingDia {
+    background: #f2eada;
+}
+#label_title {
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    font-weight: normal;
+}
+#textEdit_chat {
+    background: #ffffff;
+    border: none; /* 隐藏边框 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    font-size: 18px; /* 设置字体大小 */
+    padding: 5px; /* 设置内边距 */
+}
+#widget_send {
+    background: #ffffff;
+    border: none; /* 隐藏边框 */
+}
+
+#pushButton_receive[state='normal']{
+   background: #f0f0f0;
+   color: #2cb46e;
+   font-size: 16px; /* 设置字体大小 */
+   font-family: "Microsoft YaHei"; /* 设置字体 */
+   border-radius: 20px; /* 设置圆角 */
+}
+#pushButton_receive[state='hover']{
+   background: #d2d2d2;
+   color: #2cb46e;
+   font-size: 16px; /* 设置字体大小 */
+   font-family: "Microsoft YaHei"; /* 设置字体 */
+   border-radius: 20px; /* 设置圆角 */
+}
+#pushButton_receive[state='press']{
+   background: #c6c6c6;
+   color: #2cb46e;
+   font-size: 16px; /* 设置字体大小 */
+   font-family: "Microsoft YaHei"; /* 设置字体 */
+   border-radius: 20px; /* 设置圆角 */
+}
+#pushButton_send[state='normal']{
+    background: #f0f0f0;
+    color: #2cb46e;
+    font-size: 16px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border-radius: 20px; /* 设置圆角 */
+}
+#pushButton_send[state='hover']{
+   background: #d2d2d2;
+   color: #2cb46e;
+   font-size: 16px; /* 设置字体大小 */
+   font-family: "Microsoft YaHei"; /* 设置字体 */
+   border-radius: 20px; /* 设置圆角 */
+}
+#pushButton_send[state='press']{
+   background: #c6c6c6;
+   color: #2cb46e;
+   font-size: 16px; /* 设置字体大小 */
+   font-family: "Microsoft YaHei"; /* 设置字体 */
+   border-radius: 20px; /* 设置圆角 */
+}
+#widget_tool{
+    background: #ffffff;
+    border-bottom: 0.5px solid #ececec; /* 设置下边框颜色和宽度 */
+}
+#pushButton_emo[state='normal']{
+    border-image: url(:/picture/smile.png);
+}
+#pushButton_emo[state='hover']{
+    border-image: url(:/picture/smile_hover.png);
+}
+#pushButton_emo[state='press']{
+    border-image: url(:/picture/smile_press.png);
+}
+#pushButton_file[state='normal']{
+    border-image: url(:/picture/filedir.png);
+}
+#pushButton_file[state='hover']{
+    border-image: url(:/picture/filedir_hover.png);
+}
+#pushButton_file[state='press']{
+    border-image: url(:/picture/filedir_press.png);
+}
 

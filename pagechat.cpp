@@ -13,10 +13,10 @@ PageChat::PageChat(QWidget *parent)
     , ui(new Ui::PageChat)
 {
     ui->setupUi(this);
-    // ui->pushButton_emo->setState("normal", "hover", "press");
-    // ui->pushButton_file->setState("normal", "hover", "press");
-    // ui->pushButton_receive->setState("normal", "hover", "press");
-    // ui->pushButton_send->setState("normal", "hover", "press");
+    ui->pushButton_emo->setState("normal", "hover", "press");
+    ui->pushButton_file->setState("normal", "hover", "press");
+    ui->pushButton_receive->setState("normal", "hover", "press");
+    ui->pushButton_send->setState("normal", "hover", "press");
 }
 
 PageChat::~PageChat()
@@ -24,14 +24,14 @@ PageChat::~PageChat()
     delete ui;
 }
 
-// void PageChat::paintEvent(QPaintEvent *event)
-// {
-//     QStyleOption opt;
-//     opt.init(this);
-//     QPainter p(this);
-//     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
-//     Q_UNUSED(event);
-// }
+void PageChat::paintEvent(QPaintEvent *event)
+{
+    QStyleOption opt;
+    opt.init(this);
+    QPainter p(this);
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    Q_UNUSED(event);
+}
 
 // void PageChat::on_pushButton_send_clicked()
 // {
