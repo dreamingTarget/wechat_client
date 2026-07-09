@@ -79,7 +79,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="widget_chat_data_list" native="true"/>
+       <widget class="ChatView" name="widget_chat_data_list" native="true"/>
       </item>
       <item>
        <widget class="QWidget" name="widget_tool" native="true">
@@ -324,6 +324,12 @@
    <class>ClickedBtn</class>
    <extends>QPushButton</extends>
    <header>clickedbtn.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ChatView</class>
+   <extends>QWidget</extends>
+   <header>chatview.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -237,3 +237,16 @@ LoadingDia {
     border-image: url(:/picture/filedir_press.png);
 }
 
+#widget_chat_data_list {
+    background: #f0f0f0;
+}
+
+#chat_bg {
+    background: #f0f0f0;
+}
+
+#chat_area {
+    border: none;
+}
+
+

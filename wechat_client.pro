@@ -12,6 +12,7 @@ SOURCES += \
     chatdialog.cpp \
     chatuserlist.cpp \
     chatuserwidget.cpp \
+    chatview.cpp \
     clickedbtn.cpp \
     clickedlabel.cpp \
     customizeedit.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     chatdialog.h \
     chatuserlist.h \
     chatuserwidget.h \
+    chatview.h \
     clickedbtn.h \
     clickedlabel.h \
     customizeedit.h \
