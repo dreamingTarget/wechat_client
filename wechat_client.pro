@@ -9,7 +9,9 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    bubbleframe.cpp \
     chatdialog.cpp \
+    chatitembase.cpp \
     chatuserlist.cpp \
     chatuserwidget.cpp \
     chatview.cpp \
@@ -23,15 +25,20 @@ SOURCES += \
     logindialog.cpp \
     main.cpp \
     mainwindow.cpp \
+    messagetextedit.cpp \
     pagechat.cpp \
+    picturebubble.cpp \
     registerdialog.cpp \
     resetdialog.cpp \
     tcpmgr.cpp \
+    textbubble.cpp \
     timerbtn.cpp \
     usermanager.cpp
 
 HEADERS += \
+    bubbleframe.h \
     chatdialog.h \
+    chatitembase.h \
     chatuserlist.h \
     chatuserwidget.h \
     chatview.h \
@@ -44,11 +51,14 @@ HEADERS += \
     loadingdia.h \
     logindialog.h \
     mainwindow.h \
+    messagetextedit.h \
     pagechat.h \
+    picturebubble.h \
     registerdialog.h \
     resetdialog.h \
     singleton.h \
     tcpmgr.h \
+    textbubble.h \
     timerbtn.h \
     usermanager.h
 

@@ -64,11 +64,21 @@ enum ListItemType {
     GROUP_TIP_ITEM,
 };
 
+enum class ChatRole : char {
+    Self, Other
+};
+
 struct ServerInfo {
     QString host;
     QString port;
     QString token;
     int uid;
+};
+
+struct MsgInfo {
+    QString msgFlag;//"text, image, file"
+    QString content;//表示文件和图片的url，文本信息
+    QPixmap pixmap;//文件和图片的缩略图
 };
 
 #endif // GLOBAL_H

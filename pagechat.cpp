@@ -1,5 +1,8 @@
 #include "pagechat.h"
+#include "chatitembase.h"
 #include "global.h"
+#include "picturebubble.h"
+#include "textbubble.h"
 #include "ui_pagechat.h"
 // #include "chatitembase.h"
 // #include "textbubble.h"
@@ -17,6 +20,8 @@ PageChat::PageChat(QWidget *parent)
     ui->pushButton_file->setState("normal", "hover", "press");
     ui->pushButton_receive->setState("normal", "hover", "press");
     ui->pushButton_send->setState("normal", "hover", "press");
+
+    connect(ui->textEdit_chat, &MessageTextEdit::send, this, &PageChat::on_pushButton_send_clicked);
 }
 
 PageChat::~PageChat()
@@ -33,38 +38,39 @@ void PageChat::paintEvent(QPaintEvent *event)
     Q_UNUSED(event);
 }
 
-// void PageChat::on_pushButton_send_clicked()
-// {
-//     auto pTextEdit = ui->textEdit_chat;
-//     ChatRole role = ChatRole::Self;
-//     QString userName = QStringLiteral("不信人间有秃头");
-//     QString userIcon = ":/picture/RaceAgainstTime.jpg";
+void PageChat::on_pushButton_send_clicked()
+{
+    auto pTextEdit = ui->textEdit_chat;
+    ChatRole role = ChatRole::Self;
+    QString userName = QStringLiteral("不信人间有秃头");
+    QString userIcon = ":/picture/RaceAgainstTime.jpg";
 
-//     const QVector<MsgInfo>& msgList = pTextEdit->getMsgList();
-//     for(int i=0; i<msgList.size(); ++i)
-//     {
-//         QString type = msgList[i].msgFlag;
-//         ChatItemBase *pChatItem = new ChatItemBase(role);
-//         pChatItem->setUsername(userName);
-//         pChatItem->setUserIcon(userIcon);
-//         QWidget *pBubble = nullptr;
-//         if(type == "text")
-//         {
-//             pBubble = new TextBubble(role, msgList[i].content);
-//         }
-//         else if(type == "image")
-//         {
-//             pBubble = new PictureBubble(QPixmap(msgList[i].content) , role);
-//         }
-//         else if(type == "file")
-//         {
+    const QVector<MsgInfo>& msgList = pTextEdit->getMsgList();
+    for(int i=0; i<msgList.size(); ++i)
+    {
+        QString type = msgList[i].msgFlag;
+        ChatItemBase *pChatItem = new ChatItemBase(role);
+        pChatItem->setUsername(userName);
+        pChatItem->setUserIcon(userIcon);
+        QWidget *pBubble = nullptr;
+        if(type == "text")
+        {
+            pBubble = new TextBubble(role, msgList[i].content);
+        }
+        else if(type == "image")
+        {
+            pBubble = new PictureBubble(QPixmap(msgList[i].content) , role);
+        }
+        else if(type == "file")
+        {
 
-//         }
-//         if(pBubble != nullptr)
-//         {
-//             pChatItem->setWidget(pBubble);
-//             ui->widget_chat_data_list->appendChatItem(pChatItem);
-//         }
-//     }
-// }
+        }
+        if(pBubble != nullptr)
+        {
+            pChatItem->setWidget(pBubble);
+            ui->widget_chat_data_list->appendChatItem(pChatItem);
+        }
+    }
+}
+
 

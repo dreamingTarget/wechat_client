@@ -21,10 +21,17 @@ public:
     }
     void setInfo(QString name, QString head, QString msg);
 
+protected:
+    void resizeEvent(QResizeEvent *event) override;
+
+private:
+    void updateMsgLabel();  // 更新消息标签的显示
+
 private:
     QString m_name;
     QString m_head;
     QString m_msg;
+    QString m_fullMsg;      // 存储完整消息，用于计算省略
 
 private:
     Ui::ChatUserWidget *ui;
