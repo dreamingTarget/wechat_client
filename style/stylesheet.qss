@@ -118,16 +118,19 @@ widget_chat_user {
 }
 
 #label_chatname {
-    color:rgb(0,0,0);
-    font-size: 14px;
-    font-weight: normal;
-    font-family: "Microsoft YaHei";
+    color: #1A1A1A;
+    font-size: 15px;
+    font-weight: 400;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    background-color: transparent;
 }
 
 #widget_time #label_time {
-   color:rgb(140,140,140);
-   font-size: 12px;
-   font-family: "Microsoft YaHei";
+    color: #8E8E93;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    background-color: transparent;
 }
 
 QScrollBar:vertical {
@@ -156,9 +159,11 @@ LoadingDia {
     background: #f2eada;
 }
 #label_title {
-    font-family: "Microsoft YaHei";
-    font-size: 18px;
-    font-weight: normal;
+    color: #1A1A1A;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    background-color: transparent;
 }
 #textEdit_chat {
     background: #ffffff;
@@ -248,5 +253,107 @@ LoadingDia {
 #chat_area {
     border: none;
 }
+
+#chat_user_name {
+    color:rgb(153,153,153);
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+}
+
+#label_side_chat[state='normal']{
+    border-image: url(:/picture/chat_icon.png);
+}
+
+#label_side_chat[state='hover']{
+    border-image: url(:/picture/chat_icon_hover.png);
+}
+
+#label_side_chat[state='pressed']{
+    border-image: url(:/picture/chat_icon_press.png);
+}
+
+#label_side_chat[state='selected_normal']{
+    border-image: url(:/picture/chat_icon_press.png);
+}
+
+#label_side_chat[state='selected_hover']{
+    border-image: url(:/picture/chat_icon_press.png);
+}
+
+#label_side_chat[state='selected_pressed']{
+    border-image: url(:/picture/chat_icon_press.png);
+}
+
+#label_side_contact[state='normal']{
+    border-image: url(:/picture/contact_list.png);
+}
+
+#label_side_contact[state='hover']{
+    border-image: url(:/picture/contact_list_hover.png);
+}
+
+#label_side_contact[state='pressed']{
+    border-image: url(:/picture/contact_list_press.png);
+}
+
+#label_side_contact[state='selected_normal']{
+    border-image: url(:/picture/contact_list_press.png);
+}
+
+#label_side_contact[state='selected_hover']{
+    border-image: url(:/picture/contact_list_press.png);
+}
+
+#label_side_contact[state='selected_pressed']{
+    border-image: url(:/picture/contact_list_press.png);
+}
+
+#lineEdit_search {
+    border: 2px solid #f1f1f1;
+}
+
+/* 搜索框列表*/
+#listWidget_search {
+    background-color: rgb(247,247,248);
+    border: none;
+}
+
+#listWidget_search::item:selected {
+    background-color: #d3d7d4;
+    border: none;
+    outline: none;
+}
+
+#listWidget_search::item:hover {
+    background-color: rgb(206,207,208);
+    border: none;
+    outline: none;
+}
+
+#listWidget_search::focus {
+    border: none;
+    outline: none;
+}
+
+#invalid_item {
+    background-color: #eaeaea;
+    border: none;
+}
+
+#label_add_tip {
+    border-image: url(:/picture/addtip.png);
+}
+
+#label_right_tip{
+ border-image: url(:/picture/right_tip.png);
+}
+
+#label_msg{
+  text-align: center;
+  font-family: "Microsoft YaHei";
+  font-size: 12pt;
+}
+
+
 
 

@@ -17,78 +17,78 @@ public:
 class AddFriendApply {
 public:
     AddFriendApply(int from_uid, QString name, QString desc);
-    int _from_uid;
-    QString _name;
-    QString _desc;
+    int m_from_uid;
+    QString m_name;
+    QString m_desc;
 };
 
 struct ApplyInfo {
     ApplyInfo(int uid, QString name, QString desc,
               QString icon, QString nick, int sex, int status)
-        :_uid(uid),_name(name),_desc(desc),
-        _icon(icon),_nick(nick),_sex(sex),_status(status){}
+        :m_uid(uid),m_name(name),m_desc(desc),
+        m_icon(icon),m_nick(nick),m_sex(sex),m_status(status){}
 
     void SetIcon(QString head){
-        _icon = head;
+        m_icon = head;
     }
-    int _uid;
-    QString _name;
-    QString _desc;
-    QString _icon;
-    QString _nick;
-    int _sex;
-    int _status;
+    int m_uid;
+    QString m_name;
+    QString m_desc;
+    QString m_icon;
+    QString m_nick;
+    int m_sex;
+    int m_status;
 };
 
 struct AuthInfo {
     AuthInfo(int uid, QString name,
              QString nick, QString icon, int sex):
-        _uid(uid), _name(name), _nick(nick), _icon(icon),
-        _sex(sex){}
-    int _uid;
-    QString _name;
-    QString _nick;
-    QString _icon;
-    int _sex;
+        m_uid(uid), m_name(name), m_nick(nick), m_icon(icon),
+        m_sex(sex){}
+    int m_uid;
+    QString m_name;
+    QString m_nick;
+    QString m_icon;
+    int m_sex;
 };
 
 struct AuthRsp {
     AuthRsp(int peer_uid, QString peer_name,
             QString peer_nick, QString peer_icon, int peer_sex)
-        :_uid(peer_uid),_name(peer_name),_nick(peer_nick),
-        _icon(peer_icon),_sex(peer_sex)
+        :m_uid(peer_uid),m_name(peer_name),m_nick(peer_nick),
+        m_icon(peer_icon),m_sex(peer_sex)
     {}
 
-    int _uid;
-    QString _name;
-    QString _nick;
-    QString _icon;
-    int _sex;
+    int m_uid;
+    QString m_name;
+    QString m_nick;
+    QString m_icon;
+    int m_sex;
 };
 
 struct UserInfo {
     UserInfo(int uid, QString name, QString nick, QString icon, int sex):
-        _uid(uid),_name(name),_nick(nick),_icon(icon),_sex(sex){}
+        m_uid(uid),m_name(name),m_nick(nick),m_icon(icon),m_sex(sex){}
 
     UserInfo(std::shared_ptr<AuthInfo> auth):
-        _uid(auth->_uid),_name(auth->_name),_nick(auth->_nick),
-        _icon(auth->_icon),_sex(auth->_sex){}
+        m_uid(auth->m_uid),m_name(auth->m_name),m_nick(auth->m_nick),
+        m_icon(auth->m_icon),m_sex(auth->m_sex){}
 
     UserInfo(int uid, QString name, QString icon):
-        _uid(uid), _name(name), _nick(_name),_icon(icon),
-        _sex(0){
+        m_uid(uid), m_name(name), m_nick(m_name),m_icon(icon),
+        m_sex(0){
 
     }
 
     UserInfo(std::shared_ptr<AuthRsp> auth):
-        _uid(auth->_uid),_name(auth->_name),_nick(auth->_nick),
-        _icon(auth->_icon),_sex(auth->_sex){}
+        m_uid(auth->m_uid),m_name(auth->m_name),m_nick(auth->m_nick),
+        m_icon(auth->m_icon),m_sex(auth->m_sex){}
 
-    int _uid;
-    QString _name;
-    QString _nick;
-    QString _icon;
-    int _sex;
+    int m_uid;
+    QString m_name;
+    QString m_nick;
+    QString m_icon;
+    int m_sex;
 
 };
 
