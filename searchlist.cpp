@@ -1,6 +1,7 @@
 #include "searchlist.h"
 
 #include "adduseritem.h"
+#include "findsuccessdialog.h"
 #include "tcpmgr.h"
 #include <QScrollBar>
 // #include "customizeedit.h"
@@ -24,10 +25,10 @@ SearchList::SearchList(QWidget *parent)
 
 void SearchList::closeFindDlg()
 {
-    // if (m_find_dlg) {
-    //     m_find_dlg->hide();
-    //     m_find_dlg = nullptr;
-    // }
+    if (m_find_dlg) {
+        m_find_dlg->hide();
+        m_find_dlg = nullptr;
+    }
 }
 
 void SearchList::setSearchEdit(QWidget *edit)
@@ -90,36 +91,36 @@ void SearchList::addTipItem()
 
 void SearchList::slot_item_clicked(QListWidgetItem *item)
 {
-    // QWidget *widget = this->itemWidget(item); //获取自定义widget对象
-    // if(!widget){
-    //     qDebug()<< "slot item clicked widget is nullptr";
-    //     return;
-    // }
+    QWidget *widget = this->itemWidget(item); //获取自定义widget对象
+    if(!widget){
+        qDebug()<< "slot item clicked widget is nullptr";
+        return;
+    }
 
-    // // 对自定义widget进行操作， 将item 转化为基类ListItemBase
-    // ListItemBase *customItem = qobject_cast<ListItemBase*>(widget);
-    // if(!customItem){
-    //     qDebug()<< "slot item clicked widget is nullptr";
-    //     return;
-    // }
+    // 对自定义widget进行操作， 将item 转化为基类ListItemBase
+    ListItemBase *customItem = qobject_cast<ListItemBase*>(widget);
+    if(!customItem){
+        qDebug()<< "slot item clicked widget is nullptr";
+        return;
+    }
 
-    // auto itemType = customItem->getItemType();
-    // if(itemType == ListItemType::INVALID_ITEM){
-    //     qDebug()<< "slot invalid item clicked ";
-    //     return;
-    // }
+    auto itemType = customItem->getItemType();
+    if(itemType == ListItemType::INVALID_ITEM){
+        qDebug()<< "slot invalid item clicked ";
+        return;
+    }
 
-    // if(itemType == ListItemType::ADD_USER_TIP_ITEM){
+    if(itemType == ListItemType::ADD_USER_TIP_ITEM){
 
-    //     //todo ...
-    //     m_find_dlg = std::make_shared<FindSuccessDialog>(this);
-    //     auto si = std::make_shared<SearchInfo>(0,"llfc","llfc","hello , my friend!",0);
-    //     (std::dynamic_pointer_cast<FindSuccessDialog>(m_find_dlg))->SetSearchInfo(si);
-    //     m_find_dlg->show();
-    //     return;
-    // }
-    // //清楚弹出框
-    // closeFindDlg();
+        //todo ...
+        m_find_dlg = std::make_shared<FindSuccessDialog>(this);
+        auto si = std::make_shared<SearchInfo>(0,"llfc","llfc","hello , my friend!",0);
+        (std::dynamic_pointer_cast<FindSuccessDialog>(m_find_dlg))->setSearchInfo(si);
+        m_find_dlg->show();
+        return;
+    }
+    //清楚弹出框
+    closeFindDlg();
 
 }
 

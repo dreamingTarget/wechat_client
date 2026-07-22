@@ -61,7 +61,7 @@ ChatDialog::ChatDialog(QWidget *parent)
     connect(ui->label_side_contact, &StateWidget::clicked, this, &ChatDialog::slot_side_contact);
     connect(ui->lineEdit_search, &CustomizeEdit::textChanged, this, &ChatDialog::slot_text_changed);
 
-    // this->installEventFilter(this);
+    this->installEventFilter(this);
 
 }
 
@@ -139,24 +139,24 @@ void ChatDialog::clearLabState(StateWidget *lab)
     }
 }
 
-// void ChatDialog::handleGlobalMousePress(QMouseEvent *event)
-// {
-//     // 实现点击位置的判断和处理逻辑
-//     // 先判断是否处于搜索模式，如果不处于搜索模式则直接返回
-//     if(m_mode != ChatUIMode::SEARCH_MODE){
-//         qDebug() << "m_mode: " << m_mode;
-//         return;
-//     }
+void ChatDialog::handleGlobalMousePress(QMouseEvent *event)
+{
+    // 实现点击位置的判断和处理逻辑
+    // 先判断是否处于搜索模式，如果不处于搜索模式则直接返回
+    if(m_mode != ChatUIMode::SEARCH_MODE){
+        qDebug() << "m_mode: " << m_mode;
+        return;
+    }
 
-//     // 将鼠标点击位置转换为搜索列表坐标系中的位置
-//     QPoint posInSearchList = ui->listWidget_search->mapFromGlobal(event->globalPos());
-//     // 判断点击位置是否在聊天列表的范围内
-//     if (!ui->listWidget_search->rect().contains(posInSearchList)) {
-//         // 如果不在聊天列表内，清空输入框
-//         ui->lineEdit_search->clear();
-//         showSearch(false);
-//     }
-// }
+    // 将鼠标点击位置转换为搜索列表坐标系中的位置
+    QPoint posInSearchList = ui->listWidget_search->mapFromGlobal(event->globalPos());
+    // 判断点击位置是否在聊天列表的范围内
+    if (!ui->listWidget_search->rect().contains(posInSearchList)) {
+        // 如果不在聊天列表内，清空输入框
+        ui->lineEdit_search->clear();
+        showSearch(false);
+    }
+}
 
 void ChatDialog::slot_side_chat()
 {
@@ -181,6 +181,15 @@ void ChatDialog::slot_text_changed(const QString &str)
     if (!str.isEmpty()) {
         showSearch(true);
     }
+}
+
+bool ChatDialog::eventFilter(QObject *watched, QEvent *event)
+{
+    if (event->type() == QEvent::MouseButtonPress) {
+        QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
+        handleGlobalMousePress(mouseEvent);
+    }
+    return QDialog::eventFilter(watched, event);
 }
 
 

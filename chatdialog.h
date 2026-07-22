@@ -23,13 +23,14 @@ private:
     void addLabGroup(StateWidget* lab);
     void clearLabState(StateWidget* lab);
 
-    // void handleGlobalMousePress(QMouseEvent *event);
+    void handleGlobalMousePress(QMouseEvent *event);
 
 private slots:
     void slot_loading_chat_user();
     void slot_side_chat();
     void slot_side_contact();
     void slot_text_changed(const QString& str);
+    bool eventFilter(QObject *watched, QEvent *event);
 
 private:
     Ui::ChatDialog *ui;

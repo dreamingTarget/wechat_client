@@ -19,6 +19,7 @@ SOURCES += \
     clickedbtn.cpp \
     clickedlabel.cpp \
     customizeedit.cpp \
+    findsuccessdialog.cpp \
     global.cpp \
     httpmgr.cpp \
     listitembase.cpp \
@@ -50,6 +51,7 @@ HEADERS += \
     clickedbtn.h \
     clickedlabel.h \
     customizeedit.h \
+    findsuccessdialog.h \
     global.h \
     httpmgr.h \
     listitembase.h \
@@ -74,6 +76,7 @@ FORMS += \
     adduseritem.ui \
     chatdialog.ui \
     chatuserwidget.ui \
+    findsuccessdialog.ui \
     loadingdia.ui \
     logindialog.ui \
     mainwindow.ui \
@@ -95,17 +98,34 @@ RESOURCES += \
 DISTFILES += \
     config.ini
 
-win32:CONFIG(debug, debug | release)
-{
-    #指定要拷贝的文件目录为工程目录下release目录下的所有dll、lib文件，例如工程目录在D:\QT\Test
-    #PWD就为D:/QT/Test，DllFile = D:/QT/Test/release/*.dll
-    TargetConfig = $${PWD}/config.ini
-    #将输入目录中的"/"替换为"\"
-    TargetConfig = $$replace(TargetConfig, /, \\)
-    #将输出目录中的"/"替换为"\"
-    OutputDir =  $${OUT_PWD}/$${DESTDIR}
-    OutputDir = $$replace(OutputDir, /, \\)
-    #执行copy命令
-    QMAKE_POST_LINK += copy /Y \"$$TargetConfig\" \"$$OutputDir\"
+# 自动复制配置文件
+CONFIG += file_copies
+
+# 1. 定义要拷贝的文件（工程根目录的config.ini）
+config_copy.files = $${PWD}/config.ini
+new_file_copy.files = $${PWD}/static
+
+# 2. 按编译模式+Windows平台，指定拷贝目标路径（和DESTDIR一致，即exe所在的bin目录）
+win32 { # 仅Windows平台执行
+CONFIG(debug, debug | release) {
+    # Debug模式：拷贝到 编译目录/bin（和exe同目录）
+    config_copy.path = $${OUT_PWD}/bin
+    new_file_copy.path = $${OUT_PWD}/bin
+} else {
+    # Release模式：同样拷贝到 编译目录/bin
+    config_copy.path = $${OUT_PWD}/bin
+    new_file_copy.path = $${OUT_PWD}/bin
 }
+}
+
+# 3. 启用拷贝规则
+COPIES += config_copy
+COPIES += new_file_copy
+
+#打印路径（验证用，构建时看编译输出）
+message("config_copy: src: " $$config_copy.files)
+message("config_copy: dest: " $$config_copy.path)
+
+win32-msvc*:QMAKE_CXXFLAGS += /wd"4819" /utf-8
+
 

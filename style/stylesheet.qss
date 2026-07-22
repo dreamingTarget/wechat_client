@@ -354,6 +354,54 @@ LoadingDia {
   font-size: 12pt;
 }
 
+#FindSuccessDialog{
+   background-color: #ffffff;
+}
 
+#label_name{
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+}
+
+#pushButton_add_friend[state='normal']{
+    background: #07c160;
+    color: #ffffff;
+    font-size: 14px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border-radius: 20px; /* 设置圆角 */
+}
+
+#pushButton_add_friend[state='hover']{
+    background: #3bbb4b;
+    color: #ffffff;
+    font-size: 14px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border-radius: 20px; /* 设置圆角 */
+}
+
+#pushButton_add_friend[state='press']{
+   background: #07c160;
+   color: #ffffff;
+   font-size: 14px; /* 设置字体大小 */
+   font-family: "Microsoft YaHei"; /* 设置字体 */
+   border-radius: 20px; /* 设置圆角 */
+}
+
+#closeBtn {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    color: #888888;
+}
+
+#closeBtn:hover {
+    color: #ff4444;
+    background: rgba(255, 0, 0, 20);
+}
+
+#closeBtn:pressed {
+    color: #cc0000;
+    background: rgba(255, 0, 0, 40);
+}
 
 
