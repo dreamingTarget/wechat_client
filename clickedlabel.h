@@ -14,13 +14,16 @@ public:
                   QString select="", QString select_hover="", QString select_press="");
     ClickLbState getCurState();
 
+    bool setCurState(ClickLbState state);
+    void resetNormalState();
+
 protected:
     virtual void mousePressEvent(QMouseEvent *ev) override;
     virtual void enterEvent(QEvent* event) override;
     virtual void leaveEvent(QEvent* event) override;
 
 signals:
-    void clicked(void);
+    void clicked(QString lbtext, ClickLbState state);
 
 private:
     QString m_normal;

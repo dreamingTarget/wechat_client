@@ -404,4 +404,299 @@ LoadingDia {
     background: rgba(255, 0, 0, 40);
 }
 
+#ApplyFriend{
+    border: 1px solid #d8d8d8;
+    font-size: 14px;
+    background: #f7f7f7;
+}
+
+#ApplyFriend #closeBtn {
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    color: #9a9a9a;
+    border-radius: 0px;
+    font-family: "Microsoft YaHei";
+}
+
+#ApplyFriend #closeBtn:hover {
+    color: #2d2d2d;
+    background: #ededed;
+}
+
+#ApplyFriend #closeBtn:pressed {
+    color: #2d2d2d;
+    background: #e2e2e2;
+}
+
+#ApplyFriend #scrollArea{
+    background: transparent;
+    border: none;
+}
+
+#ApplyFriend #scrollAreaWidgetContents{
+    background: #f7f7f7;
+}
+
+#ApplyFriend #label_apply{
+    color: #191919;
+    font-family: "Microsoft YaHei";
+    font-size: 17px;
+    font-weight: 500;
+    background: transparent;
+}
+
+#ApplyFriend #line_2 {
+    color: #efefef;
+    background: #efefef;
+}
+
+#ApplyFriend #widget_apply {
+    background: transparent;
+    border: none;
+    border-radius: 0px;
+}
+
+#ApplyFriend #widget_apply QLabel{
+    color: #8c8c8c;
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    height: 25px;
+}
+
+#ApplyFriend #lineEdit_apply_name,
+#ApplyFriend #lineEdit_notes{
+    border: 1px solid #e5e5e5;
+    background: #fdfdfd;
+    color: #1f1f1f;
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    border-radius: 6px;
+    padding: 0px 12px;
+    selection-background-color: #07c160;
+    selection-color: #ffffff;
+}
+
+#ApplyFriend #lineEdit_apply_name:focus,
+#ApplyFriend #lineEdit_notes:focus{
+    border: 1px solid #cfcfcf;
+    background: #ffffff;
+}
+
+#ApplyFriend #widget_group {
+    background: transparent;
+    border: none;
+    border-radius: 0px;
+}
+
+#ApplyFriend #widget_grid {
+    background: #ffffff;
+    border: 1px solid #e7e7e7;
+    border-radius: 6px;
+}
+
+#ApplyFriend #lineEdit_label {
+    border: none;
+    background: transparent;
+    color: #333333;
+    font-size: 13px;
+    font-family: "Microsoft YaHei";
+    padding: 0px 4px;
+    min-width: 60px;
+    max-width: 96px;
+}
+
+#ApplyFriend #widget_more_label #label_more{
+    border-image: url(:/picture/arowdown.png);
+}
+
+#ApplyFriend #widget_label_list #tipslb {
+    font-size: 12px;
+    font-family: "Microsoft YaHei";
+}
+
+#ApplyFriend #widget_apply #tipslb[state='normal'],
+#ApplyFriend #widget_label_list #tipslb[state='normal'] {
+    padding: 2px 10px;
+    background: #ededed;
+    color: #5a5a5a;
+    border-radius: 10px;
+}
+
+#ApplyFriend #widget_apply #tipslb[state='hover'],
+#ApplyFriend #widget_label_list #tipslb[state='hover'] {
+    padding: 2px 10px;
+    background: #e6e6e6;
+    color: #383838;
+    border-radius: 10px;
+}
+
+#ApplyFriend #widget_apply #tipslb[state='pressed'],
+#ApplyFriend #widget_label_list #tipslb[state='pressed'] {
+    padding: 2px 10px;
+    background: #dff3e6;
+    color: #07c160;
+    border-radius: 10px;
+}
+
+#ApplyFriend #widget_apply #tipslb[state='selected_normal'],
+#ApplyFriend #widget_label_list #tipslb[state='selected_normal'] {
+    padding: 2px 10px;
+    background: #dff3e6;
+    color: #07c160;
+    border: none;
+    border-radius: 10px;
+}
+
+#ApplyFriend #widget_apply #tipslb[state='selected_hover'],
+#ApplyFriend #widget_label_list #tipslb[state='selected_hover'] {
+    padding: 2px 10px;
+    background: #d7efdf;
+    color: #06ae57;
+    border: none;
+    border-radius: 10px;
+}
+
+#ApplyFriend #widget_apply #tipslb[state='selected_pressed'],
+#ApplyFriend #widget_label_list #tipslb[state='selected_pressed'] {
+    padding: 2px 10px;
+    background: #cfead8;
+    color: #05954c;
+    border: none;
+    border-radius: 10px;
+}
+
+#ApplyFriend #widget_input {
+    background: #f5fbf7;
+    border: 1px solid #e2f1e7;
+    border-radius: 6px;
+}
+
+#FriendLabel {
+    background: #dff3e6;
+    border: none;
+    border-radius: 10px;
+}
+
+#FriendLabel #label_tip {
+    color: #07c160;
+    background: transparent;
+    font-size: 12px;
+    font-family: "Microsoft YaHei";
+    padding: 0px;
+}
+
+#ApplyFriend #widget_input #label_tip {
+    padding-left: 10px;
+    color: #7a7a7a;
+    font-size: 13px;
+    font-family: "Microsoft YaHei";
+}
+
+#ApplyFriend #widget_apply_sure {
+    background: #f7f7f7;
+    border-top: 1px solid #ededed;
+}
+
+#ApplyFriend QScrollBar:vertical {
+    background: transparent;
+    width: 8px;
+    margin: 4px 2px 4px 0px;
+}
+
+#ApplyFriend QScrollBar::handle:vertical {
+    background: #d7d7d7;
+    min-height: 30px;
+    border-radius: 4px;
+}
+
+#ApplyFriend QScrollBar::handle:vertical:hover {
+    background: #c7c7c7;
+}
+
+#ApplyFriend QScrollBar::add-line:vertical,
+#ApplyFriend QScrollBar::sub-line:vertical,
+#ApplyFriend QScrollBar::add-page:vertical,
+#ApplyFriend QScrollBar::sub-page:vertical {
+    background: transparent;
+    height: 0px;
+}
+
+#label_close[state='normal'] {
+    border-image: url(:/picture/tipclose.png);
+}
+
+#label_close[state='hover'] {
+    border-image: url(:/picture/tipclose.png);
+}
+
+#label_close[state='pressed'] {
+    border-image: url(:/picture/tipclose.png);
+}
+
+#label_close[state='select_normal'] {
+    border-image: url(:/picture/tipclose.png);
+}
+
+#label_close[state='select_hover'] {
+    border-image: url(:/picture/tipclose.png);
+}
+
+#label_close[state='select_pressed'] {
+    border-image: url(:/picture/tipclose.png);
+}
+
+#ApplyFriend #widget_apply_sure #pushButton_sure[state='normal']  {
+    background: #07c160;
+    color: #ffffff;
+    font-size: 15px;
+    font-family: "Microsoft YaHei";
+    border-radius: 6px;
+}
+
+#ApplyFriend #widget_apply_sure #pushButton_sure[state='hover'] {
+    background: #06b258;
+    color: #ffffff;
+    font-size: 15px;
+    font-family: "Microsoft YaHei";
+    border-radius: 6px;
+}
+
+#ApplyFriend #widget_apply_sure #pushButton_sure[state='press'] {
+    background: #05994c;
+    color: #ffffff;
+    font-size: 15px;
+    font-family: "Microsoft YaHei";
+    border-radius: 6px;
+}
+
+#ApplyFriend #widget_apply_sure #pushButton_cancel[state='normal']  {
+    background: #f1f1f1;
+    color: #222222;
+    font-size: 15px;
+    font-family: "Microsoft YaHei";
+    border-radius: 6px;
+    border: 1px solid #e4e4e4;
+}
+
+#ApplyFriend #widget_apply_sure #pushButton_cancel[state='hover'] {
+    background: #ebebeb;
+    color: #222222;
+    font-size: 15px;
+    font-family: "Microsoft YaHei";
+    border-radius: 6px;
+    border: 1px solid #dfdfdf;
+}
+
+#ApplyFriend #widget_apply_sure #pushButton_cancel[state='press'] {
+    background: #d4d4d4;
+    color: #222222;
+    font-size: 15px;
+    font-family: "Microsoft YaHei";
+    border-radius: 6px;
+    border: 1px solid #d4d4d4;
+}
+
+
+
 

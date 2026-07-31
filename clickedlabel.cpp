@@ -25,6 +25,28 @@ ClickLbState ClickedLabel::getCurState()
     return m_curstate;
 }
 
+bool ClickedLabel::setCurState(ClickLbState state)
+{
+    m_curstate = state;
+    if (m_curstate == ClickLbState::Normal) {
+        setProperty("state", m_normal);
+        repolish(this);
+        update();
+    } else if (m_curstate == ClickLbState::Selected) {
+        setProperty("state", m_selected);
+        repolish(this);
+        update();
+    }
+    return true;
+}
+
+void ClickedLabel::resetNormalState()
+{
+    m_curstate = ClickLbState::Normal;
+    setProperty("state", m_normal);
+    repolish(this);
+}
+
 void ClickedLabel::mousePressEvent(QMouseEvent *ev)
 {
     if (ev->button() == Qt::LeftButton) {
@@ -41,7 +63,7 @@ void ClickedLabel::mousePressEvent(QMouseEvent *ev)
             repolish(this);
             update();
         }
-        emit clicked();
+        emit clicked(text(), m_curstate);
     }
     // 调用基类的mousePressEvent以保证正常的事件处理
     QLabel::mousePressEvent(ev);

@@ -1,9 +1,13 @@
 #include "customizeedit.h"
 #include <QAction>
+#include <QInputMethodEvent>
 
 CustomizeEdit::CustomizeEdit(QWidget *parent) : QLineEdit(parent) {
     setMaxLength(30);
     connect(this, &CustomizeEdit::textChanged, this, &CustomizeEdit::limitTextLength);
+    connect(this, &CustomizeEdit::textChanged, this, [this](const QString&) {
+        emit sig_live_text_changed(text());
+    });
 
     QAction* searchAction = new QAction(this);
     searchAction->setIcon(QIcon(":/picture/search.png"));
@@ -21,6 +25,13 @@ void CustomizeEdit::focusOutEvent(QFocusEvent *event)
 {
     QLineEdit::focusOutEvent(event);
     emit sig_focus_out();
+}
+
+void CustomizeEdit::inputMethodEvent(QInputMethodEvent *event)
+{
+    const QString preeditText = event ? event->preeditString() : QString();
+    QLineEdit::inputMethodEvent(event);
+    emit sig_live_text_changed(text() + preeditText);
 }
 
 void CustomizeEdit::limitTextLength(QString text)

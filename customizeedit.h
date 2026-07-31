@@ -14,12 +14,14 @@ public:
 
 protected:
     void focusOutEvent(QFocusEvent* event) override;
+    void inputMethodEvent(QInputMethodEvent* event) override;
 
 private:
     void limitTextLength(QString text);
 
 signals:
     void sig_focus_out(bool flag = false);
+    void sig_live_text_changed(const QString& text);
 
 private:
     int m_max_len;

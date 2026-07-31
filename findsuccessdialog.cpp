@@ -1,5 +1,6 @@
 #include "findsuccessdialog.h"
 // #include "applyfriend.h"
+#include "applyfriend.h"
 #include "ui_findsuccessdialog.h"
 
 #include <QDir>
@@ -52,10 +53,10 @@ void FindSuccessDialog::setSearchInfo(std::shared_ptr<SearchInfo> si)
 
 void FindSuccessDialog::on_pushButton_add_friend_clicked()
 {
-    // hide();
-    // auto applyFriend = new ApplyFriend(m_parent);
-    // applyFriend->SetSearchInfo(m_si);
-    // applyFriend->setModal(true);
-    // applyFriend->show();
+    hide();
+    auto applyFriend = new ApplyFriend(m_parent);
+    applyFriend->setSearchInfo(m_si);
+    applyFriend->setModal(true);
+    applyFriend->show();
 }
 

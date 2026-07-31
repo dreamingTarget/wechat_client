@@ -11,6 +11,16 @@ extern QString gate_url_prefix;
 extern std::vector<QString>  strs;
 extern std::vector<QString> heads;
 extern std::vector<QString> names;
+//申请好友标签输入框最低长度
+const int MIN_APPLY_LINEEDIT_LABEL_LEN = 60;
+
+const static QString add_prefix = "添加标签";
+
+const int tip_offset = 6;
+const int TIP_H_GAP = 10;
+const int TIP_V_GAP = 10;
+const int TIP_LABEL_PAD_H = 16;
+const int TIP_LABEL_PAD_V = 8;
 
 enum ReqId {
     ID_GET_VERIFY_CODE = 1001,
