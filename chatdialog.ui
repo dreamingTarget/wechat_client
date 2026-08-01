@@ -262,7 +262,7 @@
        <widget class="SearchList" name="listWidget_search"/>
       </item>
       <item>
-       <widget class="QListWidget" name="listWidget_conn_user"/>
+       <widget class="ContactUserList" name="listWidget_conn_user"/>
       </item>
      </layout>
     </widget>
@@ -285,15 +285,15 @@
    <header>clickedbtn.h</header>
   </customwidget>
   <customwidget>
+   <class>CustomizeEdit</class>
+   <extends>QLineEdit</extends>
+   <header>customizeedit.h</header>
+  </customwidget>
+  <customwidget>
    <class>PageChat</class>
    <extends>QWidget</extends>
    <header>pagechat.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>CustomizeEdit</class>
-   <extends>QLineEdit</extends>
-   <header>customizeedit.h</header>
   </customwidget>
   <customwidget>
    <class>ChatUserList</class>
@@ -309,6 +309,11 @@
    <class>SearchList</class>
    <extends>QListWidget</extends>
    <header>searchlist.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ContactUserList</class>
+   <extends>QListWidget</extends>
+   <header>contactuserlist.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

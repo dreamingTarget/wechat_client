@@ -20,10 +20,13 @@ SOURCES += \
     clickedbtn.cpp \
     clickedlabel.cpp \
     clickedoncelabel.cpp \
+    contactuserlist.cpp \
+    conuseritem.cpp \
     customizeedit.cpp \
     findsuccessdialog.cpp \
     friendlabel.cpp \
     global.cpp \
+    grouptipitem.cpp \
     httpmgr.cpp \
     listitembase.cpp \
     loadingdia.cpp \
@@ -55,10 +58,13 @@ HEADERS += \
     clickedbtn.h \
     clickedlabel.h \
     clickedoncelabel.h \
+    contactuserlist.h \
+    conuseritem.h \
     customizeedit.h \
     findsuccessdialog.h \
     friendlabel.h \
     global.h \
+    grouptipitem.h \
     httpmgr.h \
     listitembase.h \
     loadingdia.h \
@@ -83,8 +89,10 @@ FORMS += \
     applyfriend.ui \
     chatdialog.ui \
     chatuserwidget.ui \
+    conuseritem.ui \
     findsuccessdialog.ui \
     friendlabel.ui \
+    grouptipitem.ui \
     loadingdia.ui \
     logindialog.ui \
     mainwindow.ui \

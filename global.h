@@ -72,6 +72,8 @@ enum ListItemType {
     ADD_USER_TIP_ITEM,
     INVALID_ITEM,
     GROUP_TIP_ITEM,
+    LINE_ITEM,  //分割线
+    APPLY_FRIEND_ITEM, //好友申请
 };
 
 enum class ChatRole : char {
