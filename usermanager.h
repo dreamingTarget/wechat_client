@@ -4,6 +4,8 @@
 #include <QObject>
 // #include <memory>
 #include "singleton.h"
+#include "userdata.h"
+#include <vector>
 
 class UserManager : public QObject, public Singleton<UserManager>
 {
@@ -15,9 +17,11 @@ public:
     void setName(QString name);
     void setUid(int uid);
     void setToken(QString token);
+    // void AppendApplyList(QJsonArray array);
 
     int getUid();
     QString getName();
+    std::vector<std::shared_ptr<ApplyInfo>> getApplyList();
 
 private:
     UserManager();
@@ -28,6 +32,7 @@ private:
     QString m_name;
     int m_uid;
     QString m_token;
+    std::vector<std::shared_ptr<ApplyInfo>> m_apply_list;
 
 };
 

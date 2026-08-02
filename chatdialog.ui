@@ -273,7 +273,7 @@
       <number>0</number>
      </property>
      <widget class="PageChat" name="page_chat"/>
-     <widget class="QWidget" name="page_apply"/>
+     <widget class="ApplyFriendPage" name="page_apply"/>
     </widget>
    </item>
   </layout>
@@ -314,6 +314,12 @@
    <class>ContactUserList</class>
    <extends>QListWidget</extends>
    <header>contactuserlist.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ApplyFriendPage</class>
+   <extends>QWidget</extends>
+   <header>applyfriendpage.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

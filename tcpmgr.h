@@ -28,6 +28,10 @@ signals:
 
     void sig_user_search(std::shared_ptr<SearchInfo> si);
 
+    void sig_friend_apply(std::shared_ptr<AddFriendApply>);
+    void sig_add_auth_friend(std::shared_ptr<AuthInfo>);
+    void sig_auth_rsp(std::shared_ptr<AuthRsp> auth_rsp);
+
 public slots:
     void slot_tcp_connect(ServerInfo info);
     void slot_send_data(ReqId reqid, QString data);

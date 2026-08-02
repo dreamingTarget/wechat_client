@@ -36,8 +36,8 @@ void ChatUserWidget::setInfo(QString name, QString head, QString msg)
 
 void ChatUserWidget::resizeEvent(QResizeEvent *event)
 {
-    QWidget::resizeEvent(event);
     updateMsgLabel();  // 窗口大小变化时重新省略
+    QWidget::resizeEvent(event);
 }
 
 void ChatUserWidget::updateMsgLabel()

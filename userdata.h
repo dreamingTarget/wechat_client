@@ -28,7 +28,7 @@ struct ApplyInfo {
         :m_uid(uid),m_name(name),m_desc(desc),
         m_icon(icon),m_nick(nick),m_sex(sex),m_status(status){}
 
-    void SetIcon(QString head){
+    void setIcon(QString head){
         m_icon = head;
     }
     int m_uid;

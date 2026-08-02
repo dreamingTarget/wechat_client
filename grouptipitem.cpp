@@ -21,6 +21,6 @@ QSize GroupTipItem::sizeHint() const
 
 void GroupTipItem::setGroupTip(QString str)
 {
-    ui->label->setText(str);
+    ui->label_group_title->setText(str);
 }
 
