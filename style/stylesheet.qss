@@ -46,6 +46,12 @@ QDialog#LoginDialog, #RegisterDialog {
    border-image: url(:/picture/visible_hover.png);
 }
 
+#label_forget_pwd {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    font-size: 12px;
+    color: #333333;
+}
+
 #label_forget_pwd[state = 'normal'], #label_forget_pwd[state = 'selected'] {
    color: black;
 }
@@ -820,5 +826,54 @@ ApplyFriendItem #btn_add[state='press'] {
     letter-spacing: 0.5px;
     background-color: transparent;
 }
+
+QCheckBox {
+    spacing: 8px;                 /* 复选框与文字间距 */
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    font-size: 12px;
+    color: #333333;
+}
+
+/* 未选中状态 - 指示器（复选框本身） */
+QCheckBox::indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 4px;           /* 圆角矩形 */
+    border: 1.5px solid #d9d9d9;  /* 浅灰边框 */
+    background-color: #ffffff;
+}
+
+/* 未选中 - 悬停 */
+QCheckBox::indicator:hover {
+    border-color: #b3b3b3;
+    background-color: #f5f5f5;
+}
+
+/* 未选中 - 按下 */
+QCheckBox::indicator:pressed {
+    border-color: #999999;
+    background-color: #e8e8e8;
+}
+
+/* 选中状态 - 指示器 */
+QCheckBox::indicator:checked {
+    border-color: #07C160;        /* 微信绿 */
+    background-color: #07C160;
+}
+
+/* 选中 - 悬停 */
+QCheckBox::indicator:checked:hover {
+    border-color: #06ad56;
+    background-color: #06ad56;
+}
+
+/* 选中 - 按下 */
+QCheckBox::indicator:checked:pressed {
+    border-color: #05944a;
+    background-color: #05944a;
+}
+
+
+
 
 

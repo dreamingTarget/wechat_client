@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(m_loginDialog, &LoginDialog::signal_switch_reset, this, &MainWindow::slot_switch_reset);
     connect(TcpMgr::getInstance().get(), &TcpMgr::sig_switch_chatdlg, this, &MainWindow::slot_switch_chat);
-    emit TcpMgr::getInstance()->sig_switch_chatdlg();
+    // emit TcpMgr::getInstance()->sig_switch_chatdlg();
 }
 
 MainWindow::~MainWindow()
@@ -39,6 +39,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::slot_switch_register()
 {
+    m_loginDialog->saveUserInfo();
+
     m_registerDialog = new RegisterDialog(this);
     m_registerDialog->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint);
     // m_loginDialog->hide();
@@ -50,6 +52,7 @@ void MainWindow::slot_switch_register()
 void MainWindow::slot_switch_login()
 {
     m_loginDialog = new LoginDialog(this);
+    m_loginDialog->loadUserInfo();
     setCentralWidget(m_loginDialog);
     m_loginDialog->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
     connect(m_loginDialog, &LoginDialog::signal_switch_register, this, &MainWindow::slot_switch_register);
@@ -59,6 +62,7 @@ void MainWindow::slot_switch_login()
 
 void MainWindow::slot_switch_reset()
 {
+    m_loginDialog->saveUserInfo();
     //创建一个CentralWidget, 并将其设置为MainWindow的中心部件
     m_resetDialog = new ResetDialog(this);
     m_resetDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
@@ -72,6 +76,7 @@ void MainWindow::slot_switch_reset()
 void MainWindow::slot_reset_switch_login()
 {
     m_loginDialog = new LoginDialog(this);
+    m_loginDialog->loadUserInfo();
     setCentralWidget(m_loginDialog);
     m_loginDialog->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
     connect(m_loginDialog, &LoginDialog::signal_switch_register, this, &MainWindow::slot_switch_register);
@@ -81,9 +86,21 @@ void MainWindow::slot_reset_switch_login()
 
 void MainWindow::slot_switch_chat()
 {
-    m_chatDialog = new ChatDialog(this);
-    setCentralWidget(m_chatDialog);
-    m_chatDialog->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
-    setMinimumSize(QSize(1050, 700));
-    setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
+    // m_chatDialog = new ChatDialog(this);
+    // setCentralWidget(m_chatDialog);
+    // m_chatDialog->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
+    // setMinimumSize(QSize(1050, 700));
+    // setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
+
+    // 父指针设为 nullptr，使其成为独立顶层窗口
+    m_chatDialog = new ChatDialog(nullptr);
+    m_chatDialog->setWindowTitle("WeChat");
+    // 设置为窗口类型（可加无边框修饰）
+    m_chatDialog->setWindowFlags(Qt::Window);
+    // 设置合适大小
+    m_chatDialog->resize(1050, 700);
+    // 显示聊天窗口
+    m_chatDialog->show();
+    // 隐藏主窗口
+    this->hide();
 }

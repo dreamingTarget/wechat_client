@@ -17,6 +17,9 @@ public:
     explicit LoginDialog(QWidget *parent = nullptr);
     ~LoginDialog();
 
+    void saveUserInfo();
+    void loadUserInfo();
+
 private:
     void initHeadImage();
     bool checkEmailValid();

@@ -147,7 +147,7 @@ bool RegisterDialog::checkPwdValid()
     // 创建一个正则表达式对象，按照上述密码要求
     // 这个正则表达式解释：
     // ^[a-zA-Z0-9!@#$%^&*]{6,15}$ 密码长度至少6，可以是字母、数字和特定的特殊字符
-    QRegularExpression regExp("^[a-zA-Z0-9!@#$%^&*]{6,15}$");
+    QRegularExpression regExp("^[a-zA-Z0-9!@#$%^&*.]{6,15}$");
     bool match = regExp.match(pass).hasMatch();
     if(!match){
         //提示字符非法
@@ -192,7 +192,7 @@ bool RegisterDialog::checkConfirmValid()
     // 创建一个正则表达式对象，按照上述密码要求
     // 这个正则表达式解释：
     // ^[a-zA-Z0-9!@#$%^&*]{6,15}$ 密码长度至少6，可以是字母、数字和特定的特殊字符
-    QRegularExpression regExp("^[a-zA-Z0-9!@#$%^&*]{6,15}$");
+    QRegularExpression regExp("^[a-zA-Z0-9!@#$%^&*.]{6,15}$");
     bool match = regExp.match(confirm).hasMatch();
     if(!match){
         //提示字符非法

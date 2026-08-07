@@ -6,6 +6,7 @@
 #include "tcpmgr.h"
 #include "ui_logindialog.h"
 #include <QDebug>
+#include <QFile>
 #include <QJsonDocument>
 #include <QJsonValue>
 #include <QPainter>
@@ -49,6 +50,7 @@ LoginDialog::LoginDialog(QWidget *parent)
     //连接tcp管理者发出的连接失败信号
     connect(TcpMgr::getInstance().get(), &TcpMgr::sig_login_failed, this, &LoginDialog::slot_tcp_conn_failed);
 
+    loadUserInfo();
 }
 
 LoginDialog::~LoginDialog()
@@ -173,7 +175,7 @@ bool LoginDialog::checkPwdValid()
     // 创建一个正则表达式对象，按照上述密码要求
     // 这个正则表达式解释：
     // ^[a-zA-Z0-9!@#$%^&*]{6,15}$ 密码长度至少6，可以是字母、数字和特定的特殊字符
-    QRegularExpression regex(R"(^[a-zA-Z0-9!@#$%^&*]{6,15}$)");
+    QRegularExpression regex(R"(^[a-zA-Z0-9!@#$%^&*.]{6,15}$)");
     bool match = regex.match(pass).hasMatch();
     if (!match) {
         //提示字符非法
@@ -244,6 +246,48 @@ void LoginDialog::initHttpHandlers()
     });
 }
 
+void LoginDialog::saveUserInfo()
+{
+    if (ui->checkBox_save_pwd->isChecked()) {
+        QJsonObject obj;
+        obj.insert("email", ui->lineEdit_email->text());
+        obj.insert("passwd", ui->lineEdit_pwd->text());
+        QJsonDocument doc(obj);
+        QByteArray json = doc.toJson();
+        //aes加密
+        // AesCrypto aes(AesCrypto::AES_CBC_128, KEY.left(16));
+        // json = aes.encrypto(json);
+        //写文件
+        QFile file("passwd.bin");
+        file.open(QIODevice::WriteOnly);
+        file.write(json);
+        file.close();
+    } else {
+        QFile file("passwd.bin");
+        file.remove();
+    }
+}
+
+void LoginDialog::loadUserInfo()
+{
+    QFile file("passwd.bin");
+    bool flag = file.open(QIODevice::ReadOnly);
+    if (flag) {
+        ui->checkBox_save_pwd->setChecked(true);
+        QByteArray all = file.readAll();
+        // AesCrypto aes(AesCrypto::AES_CBC_128, KEY.left(16));
+        // all = aes.decrypto(all);
+        QJsonDocument doc = QJsonDocument::fromJson(all);
+        QJsonObject obj = doc.object();
+        QString name = obj.value("email").toString();
+        QString passwd = obj.value("passwd").toString();
+        ui->lineEdit_email->setText(name);
+        ui->lineEdit_pwd->setText(passwd);
+    } else {
+        ui->checkBox_save_pwd->setChecked(false);
+    }
+}
+
 void LoginDialog::on_pushButton_login_clicked()
 {
     qDebug() << "login btn clicked";
@@ -304,6 +348,8 @@ void LoginDialog::slot_tcp_conn_finished(bool success)
         QString jsonstr = doc.toJson(QJsonDocument::Indented);
         //发送tcp请求给chatserver
         emit TcpMgr::getInstance()->sig_send_data(ReqId::ID_CHAT_LOGIN, jsonstr);
+
+        saveUserInfo();
     } else {
         showTip(tr("网络异常"), false);
         enableBtn(true);

@@ -101,6 +101,13 @@
            <height>25</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">#label_email {
+    font-family: &quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, sans-serif;
+    font-size: 12px;
+    color: #333333;
+}</string>
+         </property>
          <property name="text">
           <string>邮箱：</string>
          </property>
@@ -135,6 +142,13 @@
          <width>16777215</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#label_pwd {
+    font-family: &quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, sans-serif;
+    font-size: 12px;
+    color: #333333;
+}</string>
        </property>
        <property name="text">
         <string>密码：</string>
@@ -180,6 +194,13 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QCheckBox" name="checkBox_save_pwd">
+       <property name="text">
+        <string>记住密码</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -256,6 +277,13 @@
          <height>30</height>
         </size>
        </property>
+       <property name="styleSheet">
+        <string notr="true">#pushButton_login {
+    font-family: &quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, sans-serif;
+    font-size: 14px;
+    color: #333333;
+}</string>
+       </property>
        <property name="text">
         <string>登录</string>
        </property>
@@ -304,6 +332,13 @@
          <width>100</width>
          <height>30</height>
         </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#pushButton_register {
+    font-family: &quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, sans-serif;
+    font-size: 14px;
+    color: #333333;
+}</string>
        </property>
        <property name="text">
         <string>注册</string>
