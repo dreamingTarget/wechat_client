@@ -1,4 +1,7 @@
 #include "applyfriend.h"
+#include <QDebug>
+#include "qjsondocument.h"
+#include "qjsonobject.h"
 #include "ui_applyfriend.h"
 #include "friendlabel.h"
 #include <QApplication>
@@ -10,6 +13,7 @@
 #include <algorithm>
 #include "usermanager.h"
 #include "global.h"
+#include "tcpmgr.h"
 
 namespace {
 const int kFriendTagAreaPadding = 10;
@@ -485,7 +489,32 @@ void ApplyFriend::slot_apply_cancel()
 
 void ApplyFriend::slot_apply_sure()
 {
-    hide();
+    qDebug()<<"Slot Apply Sure called" ;
+    //发送请求逻辑
+    QJsonObject jsonObj;
+    auto uid = UserManager::getInstance()->getUid();
+    jsonObj["uid"] = uid;
+    auto name = ui->lineEdit_apply_name->text();
+    if(name.isEmpty()){
+        name = ui->lineEdit_apply_name->placeholderText();
+    }
+
+    jsonObj["applyname"] = name;
+
+    auto bakname = ui->lineEdit_notes->text();
+    if(bakname.isEmpty()){
+        bakname = ui->lineEdit_notes->placeholderText();
+    }
+
+    jsonObj["bakname"] = bakname;
+    jsonObj["touid"] = m_si->m_uid;
+
+    QJsonDocument doc(jsonObj);
+    QByteArray jsonString = doc.toJson(QJsonDocument::Indented);
+
+    //发送tcp请求给chat server
+    emit TcpMgr::getInstance()->sig_send_data(ReqId::ID_ADD_FRIEND_REQ, jsonString);
+    this->hide();
     deleteLater();
 }
 

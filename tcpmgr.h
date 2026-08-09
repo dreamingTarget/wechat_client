@@ -22,7 +22,7 @@ private:
 
 signals:
     void sig_conn_success(bool);
-    void sig_send_data(ReqId reqid, QString data);
+    void sig_send_data(ReqId reqid, QByteArray data);
     void sig_switch_chatdlg();
     void sig_login_failed(int);
 
@@ -34,7 +34,7 @@ signals:
 
 public slots:
     void slot_tcp_connect(ServerInfo info);
-    void slot_send_data(ReqId reqid, QString data);
+    void slot_send_data(ReqId reqid, QByteArray data);
 
 private:
     QTcpSocket m_socket;

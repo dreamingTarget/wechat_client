@@ -37,6 +37,7 @@ private:
     std::shared_ptr<QDialog> m_find_dlg;
     QWidget* m_search_edit;
     LoadingDia* m_loadingDialog;
+    QListWidgetItem* m_loadingItem = nullptr;
 
 };
 #endif // SEARCHLIST_H

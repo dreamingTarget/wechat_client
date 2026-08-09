@@ -63,6 +63,8 @@ ChatDialog::ChatDialog(QWidget *parent)
 
     this->installEventFilter(this);
 
+    ui->listWidget_search->setSearchEdit(ui->lineEdit_search);
+
 }
 
 ChatDialog::~ChatDialog()

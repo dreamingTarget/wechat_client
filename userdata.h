@@ -6,12 +6,13 @@
 
 class SearchInfo {
 public:
-    SearchInfo(int uid, QString name, QString nick, QString desc, int sex);
+    SearchInfo(int uid, QString name, QString nick, QString desc, int sex, QString icon);
     int m_uid;
     QString m_name;
     QString m_nick;
     QString m_desc;
     int m_sex;
+    QString m_icon;
 };
 
 class AddFriendApply {

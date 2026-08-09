@@ -7,10 +7,12 @@
 
 FindSuccessDialog::FindSuccessDialog(QWidget *parent)
     : QDialog(parent)
+    // , m_parent(parent)
     , ui(new Ui::FindSuccessDialog)
 {
     ui->setupUi(this);
 
+    //???
     m_parent = new QWidget(this);
 
     // 设置对话框标题
