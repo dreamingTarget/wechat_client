@@ -310,6 +310,7 @@ void RegisterDialog::on_pushButton_OK_clicked()
     //day11 发送http请求注册用户
     QJsonObject json_obj;
     json_obj["user"] = ui->lineEdit_user->text();
+    qDebug() << "test_register:   " << json_obj["user"];
     json_obj["email"] = ui->lineEdit_email->text();
     QString passwd = QCryptographicHash::hash(
         ui->lineEdit_pwd->text().toUtf8(),

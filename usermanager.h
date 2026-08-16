@@ -23,6 +23,9 @@ public:
     QString getName();
     std::vector<std::shared_ptr<ApplyInfo>> getApplyList();
 
+    QString icon() const;
+    void setIcon(const QString &newIcon);
+
 private:
     UserManager();
 
@@ -32,6 +35,7 @@ private:
     QString m_name;
     int m_uid;
     QString m_token;
+    QString m_icon;
     std::vector<std::shared_ptr<ApplyInfo>> m_apply_list;
 
 };

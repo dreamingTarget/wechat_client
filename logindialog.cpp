@@ -310,6 +310,7 @@ void LoginDialog::on_pushButton_login_clicked()
 void LoginDialog::slot_login_mod_finish(ReqId id, QString res, ErrorCodes err)
 {
     if(err != ErrorCodes::SUCCESS){
+        enableBtn(true);
         showTip(tr("网络请求错误"),false);
         return;
     }

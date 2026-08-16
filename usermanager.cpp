@@ -39,3 +39,13 @@ UserManager::UserManager()
 {
 
 }
+
+QString UserManager::icon() const
+{
+    return m_icon;
+}
+
+void UserManager::setIcon(const QString &newIcon)
+{
+    m_icon = newIcon;
+}

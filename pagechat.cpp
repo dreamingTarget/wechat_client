@@ -4,6 +4,7 @@
 #include "picturebubble.h"
 #include "textbubble.h"
 #include "ui_pagechat.h"
+#include "usermanager.h"
 // #include "chatitembase.h"
 // #include "textbubble.h"
 // #include "picturebubble.h"
@@ -16,6 +17,8 @@ PageChat::PageChat(QWidget *parent)
     , ui(new Ui::PageChat)
 {
     ui->setupUi(this);
+    ui->label_title->setText(UserManager::getInstance()->getName());
+
     ui->pushButton_emo->setState("normal", "hover", "press");
     ui->pushButton_file->setState("normal", "hover", "press");
     ui->pushButton_receive->setState("normal", "hover", "press");

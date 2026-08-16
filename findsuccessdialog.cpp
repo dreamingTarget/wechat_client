@@ -31,13 +31,9 @@ FindSuccessDialog::FindSuccessDialog(QWidget *parent)
     connect(closeBtn, &QPushButton::clicked, this, &QWidget::close);
 
     // 获取当前应用程序的路径
-    QString app_path = QCoreApplication::applicationDirPath();
-    QString pix_path = QDir::toNativeSeparators(app_path +
-                                                QDir::separator() + "static"+QDir::separator()+"head_1.jpg");
-    QPixmap head_pix(pix_path);
-    head_pix = head_pix.scaled(ui->label_head->size(),
-                               Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    ui->label_head->setPixmap(head_pix);
+    // QString app_path = QCoreApplication::applicationDirPath();
+    // QString pix_path = QDir::toNativeSeparators(app_path +
+    //                                             QDir::separator() + "static"+QDir::separator()+"head_1.jpg");
     ui->pushButton_add_friend->setState("normal","hover","press");
     this->setModal(true);
 }
@@ -51,6 +47,18 @@ void FindSuccessDialog::setSearchInfo(std::shared_ptr<SearchInfo> si)
 {
     ui->label_name->setText(si->m_name);
     m_si = si;
+    QString pix_path = m_si->m_icon;
+    QPixmap head_pix(pix_path);
+    QSize logicSize = ui->label_head->size();
+    qreal dpr = ui->label_head->devicePixelRatioF();
+    QSize physicalSize = logicSize * dpr;
+    head_pix = head_pix.scaled(physicalSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    head_pix.setDevicePixelRatio(dpr);
+
+    ui->label_head->setPixmap(head_pix);
+    ui->label_head->setAlignment(Qt::AlignCenter);
+
+    ui->label_head->setScaledContents(true);
 }
 
 void FindSuccessDialog::on_pushButton_add_friend_clicked()

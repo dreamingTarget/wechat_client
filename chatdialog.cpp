@@ -4,6 +4,7 @@
 #include "qaction.h"
 #include "qtimer.h"
 #include "ui_chatdialog.h"
+#include "usermanager.h"
 
 #include <QRandomGenerator>
 
@@ -36,7 +37,8 @@ ChatDialog::ChatDialog(QWidget *parent)
     connect(ui->listWidget_chat_user, &ChatUserList::sig_loading_chat_user, this, &ChatDialog::slot_loading_chat_user);
     addChatUserList();
 
-    QPixmap pixmap(":/picture/RaceAgainstTime.jpg");
+    QString pix = UserManager::getInstance()->icon();
+    QPixmap pixmap(pix);
 
     QSize logicSize = ui->label_side_head->size();
     qreal dpr = ui->label_side_head->devicePixelRatioF();
