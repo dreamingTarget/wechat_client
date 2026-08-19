@@ -8,7 +8,7 @@ ConUserItem::ConUserItem(QWidget *parent) :
     ui->setupUi(this);
     setItemType(ListItemType::CONTACT_USER_ITEM);
     ui->label_redpoint->setPixmap(QPixmap(":/picture/red_point.png").scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    showRedPoint(true);
+    showRedPoint(false);
     ui->label_redpoint->raise();
 }
 

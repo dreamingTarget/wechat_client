@@ -17,7 +17,10 @@ public:
     void setName(QString name);
     void setUid(int uid);
     void setToken(QString token);
-    // void AppendApplyList(QJsonArray array);
+    void appendApplyList(QJsonArray array);
+    void addApplyList(std::shared_ptr<ApplyInfo> app);
+    bool alreadyApply(int uid);
+    void setUserInfo(std::shared_ptr<UserInfo> user_info);
 
     int getUid();
     QString getName();
@@ -37,6 +40,7 @@ private:
     QString m_token;
     QString m_icon;
     std::vector<std::shared_ptr<ApplyInfo>> m_apply_list;
+    std::shared_ptr<UserInfo> m_user_info;
 
 };
 

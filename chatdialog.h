@@ -2,6 +2,7 @@
 #define CHATDIALOG_H
 
 #include <QDialog>
+#include "applyfriend.h"
 #include "global.h"
 #include "statewidget.h"
 
@@ -31,6 +32,8 @@ private slots:
     void slot_side_contact();
     void slot_text_changed(const QString& str);
     bool eventFilter(QObject *watched, QEvent *event);
+
+    void slot_friend_apply(std::shared_ptr<AddFriendApply> apply);
 
 private:
     Ui::ChatDialog *ui;

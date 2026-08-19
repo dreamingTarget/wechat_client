@@ -4,6 +4,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 // #include "usermanager.h"
+#include <QJsonArray>
 
 TcpMgr::~TcpMgr()
 {
@@ -128,11 +129,29 @@ void TcpMgr::initHandlers()
             return;
         }
 
-        //UserManager -->
+        //UserManager --> ???
         UserManager::getInstance()->setName(obj["name"].toString());
         UserManager::getInstance()->setUid(obj["uid"].toInt());
         UserManager::getInstance()->setToken(obj["token"].toString());
         UserManager::getInstance()->setIcon(obj["icon"].toString());
+
+        auto uid = obj["uid"].toInt();
+        auto name = obj["name"].toString();
+        auto nick = obj["nick"].toString();
+        auto icon = obj["icon"].toString();
+        auto sex = obj["sex"].toInt();
+        // auto desc = obj["desc"].toString();
+        auto user_info = std::make_shared<UserInfo>(uid, name, nick, icon, sex/*,"",desc*/);
+        if(obj.contains("apply_list")){
+            UserManager::getInstance()->appendApplyList(obj["apply_list"].toArray());
+        }
+
+        // //添加好友列表
+        // if (obj.contains("friend_list")) {
+        //     UserManager::getInstance()->appendFriendList(obj["friend_list"].toArray());
+        // }
+
+        UserManager::getInstance()->setUserInfo(user_info);
         emit sig_switch_chatdlg();
         qDebug() << "sig_switch_chatdlg()";
     });

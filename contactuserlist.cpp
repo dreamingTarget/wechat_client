@@ -148,6 +148,7 @@ void ContactUserList::slot_item_clicked(QListWidgetItem *item)
         qDebug()<< "apply friend item clicked ";
         //跳转到好友申请界面
         emit sig_switch_apply_friend_page();
+        showRedPoint(false);
         return;
     }
 

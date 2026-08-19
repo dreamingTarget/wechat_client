@@ -3,6 +3,7 @@
 #include "loadingdia.h"
 #include "qaction.h"
 #include "qtimer.h"
+#include "tcpmgr.h"
 #include "ui_chatdialog.h"
 #include "usermanager.h"
 
@@ -67,6 +68,7 @@ ChatDialog::ChatDialog(QWidget *parent)
 
     ui->listWidget_search->setSearchEdit(ui->lineEdit_search);
 
+    connect(TcpMgr::getInstance().get(), &TcpMgr::sig_friend_apply, this, &ChatDialog::slot_friend_apply);
 }
 
 ChatDialog::~ChatDialog()
@@ -194,6 +196,22 @@ bool ChatDialog::eventFilter(QObject *watched, QEvent *event)
         handleGlobalMousePress(mouseEvent);
     }
     return QDialog::eventFilter(watched, event);
+}
+
+void ChatDialog::slot_friend_apply(std::shared_ptr<AddFriendApply> apply)
+{
+    qDebug() << "receive apply friend slot, applyuid is " << apply->m_from_uid << " name is "
+             << apply->m_name << " desc is " << apply->m_desc;
+
+    bool b_already = UserManager::getInstance()->alreadyApply(apply->m_from_uid);
+    if (b_already) {
+        return;
+    }
+
+    UserManager::getInstance()->addApplyList(std::make_shared<ApplyInfo>(apply));
+    ui->label_side_contact->showRedPoint(true);
+    ui->listWidget_conn_user->showRedPoint(true);
+    ui->page_apply->addNewApply(apply);
 }
 
 

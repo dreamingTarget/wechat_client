@@ -9,6 +9,10 @@
 StateWidget::StateWidget(QWidget *parent) : QLabel(parent) {
     setCursor(Qt::PointingHandCursor);
     addRedPoint();
+
+    connect(this, &StateWidget::clicked, this, [this](){
+        this->showRedPoint(false);
+    });
 }
 
 void StateWidget::setState(QString normal, QString hover, QString press, QString select, QString select_hover, QString select_press)
@@ -100,6 +104,7 @@ void StateWidget::mousePressEvent(QMouseEvent *ev)
             repolish(this);
             update();
         }
+        emit clicked();
 
         return;
     }
