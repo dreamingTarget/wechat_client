@@ -35,7 +35,7 @@ void ApplyFriendPage::addNewApply(std::shared_ptr<AddFriendApply> apply)
     int head_i = randomValue % heads.size();
     auto* apply_item = new ApplyFriendItem();
     auto apply_info = std::make_shared<ApplyInfo>(apply->m_from_uid,
-                                                  apply->m_name, apply->m_desc,heads[head_i], apply->m_name, 0, 0);
+                                                  apply->m_name, apply->m_desc,apply->m_icon, apply->m_name, 0, 0);
     apply_item->setInfo( apply_info);
     QListWidgetItem* item = new QListWidgetItem;
     //qDebug()<<"chat_user_wid sizeHint is " << chat_user_wid->sizeHint();
@@ -44,6 +44,8 @@ void ApplyFriendPage::addNewApply(std::shared_ptr<AddFriendApply> apply)
     ui->listWidget_apply_friend->insertItem(0,item);
     ui->listWidget_apply_friend->setItemWidget(item, apply_item);
     apply_item->showAddBtn(true);
+    auto uid = apply_item->getUid();
+    m_unauth_items[uid] = apply_item;
     //收到审核好友信号
     connect(apply_item, &ApplyFriendItem::sig_auth_friend, [this](std::shared_ptr<ApplyInfo> apply_info) {
         auto* authFriend = new AuthenFriend(this);

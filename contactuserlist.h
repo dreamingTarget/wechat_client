@@ -32,12 +32,13 @@ signals:
 
 public slots:
     void slot_item_clicked(QListWidgetItem *item);
-    //     void slot_add_auth_firend(std::shared_ptr<AuthInfo>);
-    //     void slot_auth_rsp(std::shared_ptr<AuthRsp>);
+        void slot_add_auth_firend(std::shared_ptr<AuthInfo>);
+        void slot_auth_rsp(std::shared_ptr<AuthRsp>);
 
 private:
     ConUserItem* m_add_friend_item;
     QListWidgetItem* m_groupitem;
+    bool m_load_pending;
 
 };
 

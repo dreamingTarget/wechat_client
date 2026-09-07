@@ -22,6 +22,8 @@ const int TIP_V_GAP = 10;
 const int TIP_LABEL_PAD_H = 16;
 const int TIP_LABEL_PAD_V = 8;
 
+const int CHAT_COUNT_PER_PAGE = 13;
+
 enum ReqId {
     ID_GET_VERIFY_CODE = 1001,
     ID_REG_USER = 1002,

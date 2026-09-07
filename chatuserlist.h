@@ -19,6 +19,9 @@ protected:
 
 signals:
     void sig_loading_chat_user();
+
+private:
+    bool m_load_pending;
 };
 
 #endif // CHATUSERLIST_H

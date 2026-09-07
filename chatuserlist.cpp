@@ -1,6 +1,11 @@
 #include "chatuserlist.h"
 
-ChatUserList::ChatUserList(QWidget *parent) : QListWidget(parent) {
+#include "usermanager.h"
+
+#include <QCoreApplication>
+#include <QTimer>
+
+ChatUserList::ChatUserList(QWidget *parent) : QListWidget(parent), m_load_pending(false) {
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     //安装事件过滤器
@@ -37,12 +42,33 @@ bool ChatUserList::eventFilter(QObject *watched, QEvent *event)
         // qDebug() << maxScrollValue << ", " << curValue;
 
         if (maxScrollValue - curValue <= 0) {
-            //滚动到底部，加载新的联系人
-            qDebug() << "load more chat user";
+        //     //滚动到底部，加载新的联系人
+        //     qDebug() << "load more chat user";
+        //     //发送信号通知聊天界面加载更多聊天内容
+        //     emit sig_loading_chat_user();
+        // }
+        // return true;//停止事件传递
+            auto b_loaded = UserManager::getInstance()->isLoadChatFin();
+            if(b_loaded){
+                return true;
+            }
+
+            if(m_load_pending){
+                return true;
+            }
+            // 滚动到底部，加载新的联系人
+            qDebug()<<"load more chat user";
+            m_load_pending = true;
+
+            QTimer::singleShot(100, [this](){
+                m_load_pending = false;
+                QCoreApplication::quit(); // 完成后退出应用程序
+            });
             //发送信号通知聊天界面加载更多聊天内容
             emit sig_loading_chat_user();
         }
-        return true;//停止事件传递
+
+        return true; // 停止事件传递
     }
     return QListWidget::eventFilter(watched, event);
 }

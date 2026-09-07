@@ -34,6 +34,29 @@ void ChatUserWidget::setInfo(QString name, QString head, QString msg)
     updateMsgLabel();  // 调用更新函数
 }
 
+void ChatUserWidget::setInfo(std::shared_ptr<UserInfo> user_info)
+{
+    m_user_info = user_info;
+
+    // 加载头像（代码不变）
+    QPixmap pix(m_user_info->m_icon);
+    QSize logicSize = ui->label_icon->size();
+    qreal dpr = ui->label_icon->devicePixelRatioF();
+    QSize physicalSize = logicSize * dpr;
+    pix = pix.scaled(physicalSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    pix.setDevicePixelRatio(dpr);
+    ui->label_icon->setPixmap(pix);
+    ui->label_icon->setAlignment(Qt::AlignCenter);
+
+    ui->label_chatname->setText(m_user_info->m_name);
+    ui->label_userchat->setText(m_user_info->m_last_msg);
+}
+
+std::shared_ptr<UserInfo> ChatUserWidget::getUserInfo()
+{
+    return m_user_info;
+}
+
 void ChatUserWidget::resizeEvent(QResizeEvent *event)
 {
     updateMsgLabel();  // 窗口大小变化时重新省略

@@ -492,25 +492,26 @@ void AuthenFriend::slot_apply_cancel()
 
 void AuthenFriend::slot_apply_sure()
 {
-    qDebug()<<"Slot Apply Sure called" ;
-    //发送请求逻辑
+    qDebug() << "Slot Apply Sure ";
+    //添加发送逻辑
     QJsonObject jsonObj;
     auto uid = UserManager::getInstance()->getUid();
-    jsonObj["uid"] = uid;
-
-    auto bakname = ui->lineEdit_notes->text();
-    if(bakname.isEmpty()){
-        bakname = ui->lineEdit_notes->placeholderText();
-    }
-
-    jsonObj["bakname"] = bakname;
+    jsonObj["fromuid"] = uid;
     jsonObj["touid"] = m_apply_info->m_uid;
+    QString back_name = "";
+    if(ui->lineEdit_notes->text().isEmpty()){
+        back_name = ui->lineEdit_notes->placeholderText();
+    }else{
+        back_name = ui->lineEdit_notes->text();
+    }
+    jsonObj["back"] = back_name;
 
     QJsonDocument doc(jsonObj);
-    QByteArray jsonString = doc.toJson(QJsonDocument::Compact);
+    QByteArray jsonData = doc.toJson(QJsonDocument::Compact);
 
     //发送tcp请求给chat server
-    emit TcpMgr::getInstance()->sig_send_data(ReqId::ID_AUTH_FRIEND_REQ, jsonString);
+    emit TcpMgr::getInstance()->sig_send_data(ReqId::ID_AUTH_FRIEND_REQ, jsonData);
+
     this->hide();
     deleteLater();
 }

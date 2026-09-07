@@ -27,6 +27,7 @@ private:
     void addTipItem();
 
 signals:
+    void sig_jump_chat_item(std::shared_ptr<SearchInfo> si);
 
 private slots:
     void slot_item_clicked(QListWidgetItem *item);
